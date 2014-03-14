@@ -1,0 +1,166 @@
+
+event.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fall
+  rotate: false
+  xy: 1, 1560
+  size: 864, 420
+  orig: 864, 420
+  offset: 0, 0
+  index: -1
+spring
+  rotate: false
+  xy: 1, 1138
+  size: 864, 420
+  orig: 864, 420
+  offset: 0, 0
+  index: -1
+summer
+  rotate: false
+  xy: 867, 1560
+  size: 864, 420
+  orig: 864, 420
+  offset: 0, 0
+  index: -1
+winter
+  rotate: false
+  xy: 1, 716
+  size: 864, 420
+  orig: 864, 420
+  offset: 0, 0
+  index: -1
+eventback
+  rotate: false
+  xy: 867, 789
+  size: 432, 769
+  orig: 432, 769
+  offset: 0, 0
+  index: -1
+ie
+  rotate: false
+  xy: 1, 294
+  size: 432, 420
+  orig: 432, 420
+  offset: 0, 0
+  index: -1
+waku
+  rotate: false
+  xy: 1301, 1306
+  size: 385, 252
+  orig: 385, 252
+  offset: 0, 0
+  index: -1
+s_hashiru
+  rotate: false
+  xy: 1733, 1855
+  size: 120, 125
+  orig: 120, 125
+  offset: 0, 0
+  index: -1
+s_shoumen
+  rotate: false
+  xy: 1, 147
+  size: 99, 145
+  orig: 99, 145
+  offset: 0, 0
+  index: -1
+s_yokomuki
+  rotate: false
+  xy: 435, 565
+  size: 93, 149
+  orig: 93, 149
+  offset: 0, 0
+  index: -1
+s_aruku
+  rotate: false
+  xy: 1301, 1176
+  size: 104, 128
+  orig: 104, 128
+  offset: 0, 0
+  index: -1
+s_miageru
+  rotate: false
+  xy: 1733, 1709
+  size: 88, 144
+  orig: 88, 144
+  offset: 0, 0
+  index: -1
+inu
+  rotate: false
+  xy: 1855, 1883
+  size: 128, 97
+  orig: 128, 97
+  offset: 0, 0
+  index: -1
+s_miorosu
+  rotate: false
+  xy: 1, 1
+  size: 72, 144
+  orig: 72, 144
+  offset: 0, 0
+  index: -1
+s_furimuku
+  rotate: false
+  xy: 102, 173
+  size: 95, 119
+  orig: 95, 119
+  offset: 0, 0
+  index: -1
+ookami
+  rotate: false
+  xy: 530, 633
+  size: 128, 81
+  orig: 128, 81
+  offset: 0, 0
+  index: -1
+s_kagamu
+  rotate: false
+  xy: 435, 446
+  size: 88, 117
+  orig: 88, 117
+  offset: 0, 0
+  index: -1
+y_hana
+  rotate: false
+  xy: 1301, 1055
+  size: 72, 119
+  orig: 72, 119
+  offset: 0, 0
+  index: -1
+y_aruku
+  rotate: false
+  xy: 1407, 1186
+  size: 67, 118
+  orig: 67, 118
+  offset: 0, 0
+  index: -1
+y_miageru
+  rotate: false
+  xy: 1733, 1588
+  size: 64, 119
+  orig: 64, 119
+  offset: 0, 0
+  index: -1
+y_miorosu
+  rotate: false
+  xy: 199, 175
+  size: 64, 117
+  orig: 64, 117
+  offset: 0, 0
+  index: -1
+y_odoroku
+  rotate: false
+  xy: 435, 332
+  size: 64, 112
+  orig: 64, 112
+  offset: 0, 0
+  index: -1
+y_yokomuki
+  rotate: false
+  xy: 1301, 941
+  size: 56, 112
+  orig: 56, 112
+  offset: 0, 0
+  index: -1
