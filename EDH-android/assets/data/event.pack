@@ -33,9 +33,9 @@ winter
   index: -1
 eventback
   rotate: false
-  xy: 867, 789
-  size: 432, 769
-  orig: 432, 769
+  xy: 867, 790
+  size: 432, 768
+  orig: 432, 768
   offset: 0, 0
   index: -1
 ie

@@ -5,14 +5,14 @@ filter: Nearest,Nearest
 repeat: none
 batleback
   rotate: false
-  xy: 1, 1252
-  size: 432, 769
-  orig: 432, 769
+  xy: 1, 1253
+  size: 432, 768
+  orig: 432, 768
   offset: 0, 0
   index: -1
 fall1
   rotate: false
-  xy: 1, 482
+  xy: 1, 483
   size: 432, 768
   orig: 432, 768
   offset: 0, 0
@@ -61,14 +61,14 @@ winter1
   index: -1
 clearwaku
   rotate: false
-  xy: 1, 445
+  xy: 1, 446
   size: 373, 35
   orig: 373, 35
   offset: 0, 0
   index: -1
 clearbar
   rotate: false
-  xy: 1, 414
+  xy: 1, 415
   size: 339, 29
   orig: 339, 29
   offset: 0, 0
@@ -82,7 +82,7 @@ hpwaku
   index: -1
 ready
   rotate: false
-  xy: 1, 317
+  xy: 1, 318
   size: 164, 95
   orig: 164, 95
   offset: 0, 0
@@ -96,119 +96,119 @@ pause
   index: -1
 hpbar
   rotate: false
-  xy: 167, 369
+  xy: 376, 438
   size: 197, 43
   orig: 197, 43
   offset: 0, 0
   index: -1
 mush
   rotate: false
-  xy: 1, 203
+  xy: 1, 204
   size: 64, 112
   orig: 64, 112
   offset: 0, 0
   index: -1
 bossgost
   rotate: false
-  xy: 1737, 1806
+  xy: 167, 349
   size: 101, 64
   orig: 101, 64
   offset: 0, 0
   index: -1
 gost
   rotate: false
-  xy: 67, 251
+  xy: 1737, 1806
   size: 74, 64
   orig: 74, 64
   offset: 0, 0
   index: -1
 bossscor
   rotate: false
-  xy: 1737, 1736
+  xy: 67, 248
   size: 69, 68
   orig: 69, 68
   offset: 0, 0
   index: -1
 bosswood
   rotate: false
-  xy: 1737, 1670
+  xy: 270, 349
   size: 70, 64
   orig: 70, 64
   offset: 0, 0
   index: -1
 bosskuma
   rotate: false
-  xy: 1737, 1604
+  xy: 1737, 1740
   size: 68, 64
   orig: 68, 64
   offset: 0, 0
   index: -1
 fly
   rotate: false
-  xy: 1, 133
+  xy: 1, 134
   size: 64, 68
   orig: 64, 68
   offset: 0, 0
   index: -1
 obake
   rotate: false
-  xy: 67, 183
+  xy: 67, 180
   size: 64, 66
   orig: 64, 66
   offset: 0, 0
   index: -1
 bear
   rotate: false
-  xy: 1737, 1538
+  xy: 1813, 1806
   size: 65, 64
   orig: 65, 64
   offset: 0, 0
   index: -1
 hit
   rotate: false
-  xy: 1, 66
+  xy: 1737, 1673
   size: 64, 65
   orig: 64, 65
   offset: 0, 0
   index: 1
 hit
   rotate: false
-  xy: 67, 116
+  xy: 1, 67
   size: 64, 65
   orig: 64, 65
   offset: 0, 0
   index: 2
 hit
   rotate: false
-  xy: 1737, 1471
+  xy: 67, 113
   size: 64, 65
   orig: 64, 65
   offset: 0, 0
   index: 3
 wood
   rotate: false
-  xy: 1, 1
+  xy: 1807, 1741
   size: 64, 63
   orig: 64, 63
   offset: 0, 0
   index: -1
 just
   rotate: false
-  xy: 67, 52
+  xy: 1737, 1609
   size: 64, 62
   orig: 64, 62
   offset: 0, 0
   index: 3
 mouse
   rotate: false
-  xy: 1737, 1405
+  xy: 1, 1
   size: 62, 64
   orig: 62, 64
   offset: 0, 0
   index: -1
 pumpkin
   rotate: false
-  xy: 1737, 1344
+  xy: 1737, 1548
   size: 64, 59
   orig: 64, 59
   offset: 0, 0
@@ -229,28 +229,28 @@ bug
   index: -1
 bat
   rotate: false
-  xy: 167, 322
+  xy: 1737, 1501
   size: 64, 45
   orig: 64, 45
   offset: 0, 0
   index: -1
 wolf
   rotate: false
-  xy: 1840, 1806
+  xy: 1737, 1435
   size: 42, 64
   orig: 42, 64
   offset: 0, 0
   index: -1
 just
   rotate: false
-  xy: 1808, 1750
+  xy: 1737, 1379
   size: 51, 54
   orig: 51, 54
   offset: 0, 0
   index: 2
 just_
   rotate: false
-  xy: 67, 10
+  xy: 575, 441
   size: 40, 40
   orig: 40, 40
   offset: 0, 0

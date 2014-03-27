@@ -12,9 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 public class Assets {
-	public static Skin title = new Skin();
+	public static Skin title;
 	public static Music music;
 	public static TextureAtlas titleAtlas;
+	public static BitmapFont TOfont;
+	public static BitmapFont mikachan;
 
 	public static final int MORUDAU = 0;
 	public static final int YUUGURE = 1;
@@ -26,9 +28,10 @@ public class Assets {
 
 	public static void loadTitle() {
 		finishLoad = false;
+		titleAtlas = new TextureAtlas(Gdx.files.internal("data/title.pack"));
 
 		// フォントファイル、ラベルスタイルのスキン
-		BitmapFont TOfont = new BitmapFont(
+		TOfont = new BitmapFont(
 				Gdx.files.internal("data/font/TOfont.fnt"));
 		TOfont.setScale(1.2f);
 		title.add("TOfont", TOfont);
@@ -42,13 +45,11 @@ public class Assets {
 		LabelStyle lbl3 = new LabelStyle(TOfont, Color.BLACK);
 		title.add("black", lbl3);
 
-		BitmapFont mikachan = new BitmapFont(
+		mikachan = new BitmapFont(
 				Gdx.files.internal("data/font/mikachan.fnt"));
 		mikachan.setScale(1.5f);
 		LabelStyle mikaLabel = new LabelStyle(mikachan, Color.BLACK);
 		title.add("mikachan", mikaLabel);
-
-		titleAtlas = new TextureAtlas(Gdx.files.internal("data/title.pack"));
 
 		// タイトル画面のバック、各ロゴのスキン
 		TextureRegion TBack = new TextureRegion(
@@ -82,7 +83,7 @@ public class Assets {
 	}
 
 	public static TextureAtlas eventAtlas;
-	public static Skin event = new Skin();
+	public static Skin event;
 
 	public static void loadEvent() {
 		finishLoad = false;
@@ -170,7 +171,7 @@ public class Assets {
 	}
 
 	private static TextureAtlas batleAtlas;
-	public static Skin batle = new Skin();
+	public static Skin batle;
 
 	public static void loadBatle() {
 		finishLoad = false;
@@ -300,35 +301,49 @@ public class Assets {
 		}
 	}
 
+	public static void initAssets() {
+		finishLoad = titleLoad = eventLoad = batleLoad = false;
+		title = new Skin();
+		event = new Skin();
+		batle = new Skin();
+	}
+
 	public static void dispose() {
+		finishLoad = false;
+
 		disTitle();
 		disEvent();
 		disBatle();
+		
+		title = event = batle = null;
+		TOfont = mikachan = null;
 
 		music.dispose();
 	}
 
 	public static void disTitle() {
 		if (titleLoad) {
-			title.dispose();
-			titleAtlas.dispose();
 			titleLoad = false;
+			titleAtlas.dispose();
+			TOfont.dispose();
+			mikachan.dispose();
+			title.dispose();
 		}
 	}
 
 	public static void disEvent() {
 		if (eventLoad) {
-			event.dispose();
-			eventAtlas.dispose();
 			eventLoad = false;
+			eventAtlas.dispose();
+			event.dispose();
 		}
 	}
 
 	public static void disBatle() {
 		if (batleLoad) {
-			batle.dispose();
-			batleAtlas.dispose();
 			batleLoad = false;
+			batleAtlas.dispose();
+			batle.dispose();
 		}
 	}
 

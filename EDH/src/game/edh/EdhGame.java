@@ -1,7 +1,7 @@
 package game.edh;
 
 import game.edh.frame.BaseScreen;
-import game.edh.frame.MusicHandler;
+import game.edh.screen.LoadScreen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -20,6 +20,7 @@ public class EdhGame extends Game {
 		// TODO 自動生成されたメソッド・スタブ
 		// Assets.load();
 		music = new MusicHandler(this);
+		Assets.initAssets();
 		settings = load();
 		setScreen(new LoadScreen(this, LoadScreen.NextScreen.Title));
 		

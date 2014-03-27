@@ -1,0 +1,173 @@
+
+games.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ue
+  rotate: false
+  xy: 1, 1
+  size: 19, 30
+  orig: 19, 30
+  offset: 0, 0
+  index: 2
+sita
+  rotate: false
+  xy: 22, 1
+  size: 17, 30
+  orig: 17, 30
+  offset: 0, 0
+  index: 2
+ue
+  rotate: false
+  xy: 41, 4
+  size: 19, 27
+  orig: 19, 27
+  offset: 0, 0
+  index: 5
+hidari
+  rotate: false
+  xy: 62, 3
+  size: 17, 28
+  orig: 17, 28
+  offset: 0, 0
+  index: 1
+migi
+  rotate: false
+  xy: 81, 3
+  size: 17, 28
+  orig: 17, 28
+  offset: 0, 0
+  index: 1
+hidari
+  rotate: false
+  xy: 100, 2
+  size: 16, 29
+  orig: 16, 29
+  offset: 0, 0
+  index: 2
+migi
+  rotate: false
+  xy: 118, 2
+  size: 16, 29
+  orig: 16, 29
+  offset: 0, 0
+  index: 2
+sita
+  rotate: false
+  xy: 136, 2
+  size: 16, 29
+  orig: 16, 29
+  offset: 0, 0
+  index: 1
+sita
+  rotate: false
+  xy: 154, 2
+  size: 16, 29
+  orig: 16, 29
+  offset: 0, 0
+  index: 3
+hidari
+  rotate: false
+  xy: 172, 3
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+migi
+  rotate: false
+  xy: 190, 3
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+sita
+  rotate: false
+  xy: 208, 4
+  size: 17, 27
+  orig: 17, 27
+  offset: 0, 0
+  index: 5
+hidari
+  rotate: false
+  xy: 227, 6
+  size: 17, 25
+  orig: 17, 25
+  offset: 0, 0
+  index: 4
+migi
+  rotate: false
+  xy: 246, 6
+  size: 17, 25
+  orig: 17, 25
+  offset: 0, 0
+  index: 4
+hidari
+  rotate: false
+  xy: 265, 5
+  size: 16, 26
+  orig: 16, 26
+  offset: 0, 0
+  index: 5
+migi
+  rotate: false
+  xy: 283, 5
+  size: 16, 26
+  orig: 16, 26
+  offset: 0, 0
+  index: 5
+hidari
+  rotate: false
+  xy: 301, 6
+  size: 16, 25
+  orig: 16, 25
+  offset: 0, 0
+  index: 6
+migi
+  rotate: false
+  xy: 319, 6
+  size: 16, 25
+  orig: 16, 25
+  offset: 0, 0
+  index: 6
+sita
+  rotate: false
+  xy: 337, 5
+  size: 15, 26
+  orig: 15, 26
+  offset: 0, 0
+  index: 4
+sita
+  rotate: false
+  xy: 354, 5
+  size: 15, 26
+  orig: 15, 26
+  offset: 0, 0
+  index: 6
+ue
+  rotate: false
+  xy: 371, 2
+  size: 15, 29
+  orig: 15, 29
+  offset: 0, 0
+  index: 1
+ue
+  rotate: false
+  xy: 388, 2
+  size: 15, 29
+  orig: 15, 29
+  offset: 0, 0
+  index: 3
+ue
+  rotate: false
+  xy: 405, 5
+  size: 15, 26
+  orig: 15, 26
+  offset: 0, 0
+  index: 4
+ue
+  rotate: false
+  xy: 422, 5
+  size: 15, 26
+  orig: 15, 26
+  offset: 0, 0
+  index: 6

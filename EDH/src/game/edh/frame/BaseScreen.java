@@ -4,11 +4,13 @@ import game.edh.Assets;
 import game.edh.EdhGame;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public abstract class BaseScreen implements Screen {
@@ -35,6 +37,17 @@ public abstract class BaseScreen implements Screen {
 		mainTable.getColor().a = 0;
 
 		stage.addActor(mainTable);
+		Gdx.input.setCatchBackKey(true);
+		stage.addListener(new InputListener() {
+			@Override
+			public boolean keyUp(InputEvent event, int keycode) {
+				// TODO 自動生成されたメソッド・スタブ
+				if(keycode == Keys.BACK)
+					backPress();
+			
+				return false;
+			}
+		});
 
 		Gdx.input.setInputProcessor(stage);
 	}
@@ -94,6 +107,8 @@ public abstract class BaseScreen implements Screen {
 	public void setMusic(int music) {
 		this.music = music;
 	}
+	
+	public abstract void backPress();
 
 	@Override
 	public abstract void render(float delta);
@@ -107,7 +122,9 @@ public abstract class BaseScreen implements Screen {
 	}
 
 	@Override
-	public abstract void hide();
+	public void hide() {
+		
+	}
 
 	@Override
 	public abstract void pause();
@@ -118,8 +135,8 @@ public abstract class BaseScreen implements Screen {
 	@Override
 	public void dispose() {
 		Gdx.app.log("Screen", "dispose");
-		stage.dispose();
 		Assets.dispose();
 		Assets.music.dispose();
+		stage.dispose();
 	}
 }

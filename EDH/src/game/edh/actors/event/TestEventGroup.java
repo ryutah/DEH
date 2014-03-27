@@ -1,0 +1,118 @@
+package game.edh.actors.event;
+
+import game.edh.Assets;
+import game.edh.screen.TestEventScreen;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
+public class TestEventGroup extends Group {
+	OrthographicCamera cam;
+	Matrix4 matrix;
+	Image back;
+	public TestShujinkou shujinkou;
+	public TestYuujin yuujin;
+	Vector3 v3;
+	TestEventScreen screen;
+	
+	boolean camMove = false;
+	public boolean talking = false;
+	
+	public final float scaleX = Gdx.graphics.getWidth() / 432f;
+	public final float scaleY = Gdx.graphics.getHeight() / 768f;
+	
+	public TestEventGroup(TestEventScreen screen) {
+		// TODO 自動生成されたコンストラクター・スタブ
+		cam = new OrthographicCamera();
+		cam.setToOrtho(false, 10.8f, 19.2f);
+		cam.position.set(21.6f - 5.4f, 9.6f, 0);
+		cam.update();
+		
+		v3 = new Vector3();
+		
+		matrix = new Matrix4();
+		back = new Image(Assets.event.getRegion("winter"));
+		back.setBounds(0, 7.2f, 21.6f, 11f);
+		Gdx.app.log("Back", "" + back.getY());
+		
+		setBounds(0, 0, 21.6f, 19.2f);
+		Gdx.app.log("Group", "" + getWidth());
+		
+		addActor(back);
+		
+		shujinkou = new TestShujinkou(19.2f / 768, TestShujinkou.ARUKU, TestShujinkou.LEFT);
+		shujinkou.setX(20);
+		shujinkou.setY(8.4f);
+		
+		yuujin = new TestYuujin(TestYuujin.YOKOMUKI, TestYuujin.RIGHT);
+		yuujin.setPosition(1, 8.4f);
+		
+		addActor(shujinkou);
+		addActor(yuujin);
+		
+		shujinkou.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				// TODO 自動生成されたメソッド・スタブ
+				shujinkou.startMove(TestShujinkou.LEFT);
+				Gdx.app.log("Group", "Touch" + x + "," + y);
+			}
+		});
+	}
+	
+	@Override
+	public Actor hit(float x, float y, boolean touchable) {
+		// TODO 自動生成されたメソッド・スタブ
+		v3.set(x * scaleX, Gdx.graphics.getHeight() - (y * scaleY), 0);
+		cam.unproject(v3);
+		Gdx.app.log("Touch", v3.x + "," + v3.y);
+		return super.hit(v3.x, v3.y, touchable);
+	}
+	
+	public void camMove() {
+		if(cam.position.x > 5.4f)
+			cam.position.add(-.1f, 0, 0);
+		else {
+			cam.position.set(5.4f, 9.6f, 0);
+			talking = true;
+			camMove = false;
+		}
+	}
+	
+	@Override
+	public void act(float delta) {
+		// TODO 自動生成されたメソッド・スタブ
+		if(shujinkou.getX() < 10.8f)
+			camMove();
+		if(shujinkou.getX() < 8.5f) {
+			shujinkou.stopMove();
+			shujinkou.setX(8.5f);
+			setTouchable(Touchable.disabled);
+		}
+		
+		cam.update();
+		super.act(delta);
+	}
+	
+	public boolean startTalking() {
+		return talking;
+	}
+	
+	@Override
+	public void draw(Batch batch, float parentAlpha) {
+		// TODO 自動生成されたメソッド・スタブ
+		matrix.set(batch.getProjectionMatrix());
+		batch.setProjectionMatrix(cam.combined);
+		super.draw(batch, parentAlpha);
+		batch.setProjectionMatrix(matrix);
+	}
+}

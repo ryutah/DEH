@@ -1,21 +1,18 @@
 package game.edh.frame;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-import game.edh.EdhGame;
-import game.edh.TitleScreen;
+import game.edh.screen.TitleScreen;
 
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public abstract class BaseTable extends Table {
-	protected EdhGame edh;
 	protected BaseScreen screen;
 	protected Table mainTable;
 	protected BaseTable nextTable;
 	
-	public BaseTable(EdhGame game,BaseScreen screen, Table mainTable) {
+	public BaseTable(BaseScreen screen, Table mainTable) {
 		// TODO 自動生成されたコンストラクター・スタブ
-		this.edh = game;
 		this.screen = screen;
 		this.mainTable = mainTable;
 		setTouchable(Touchable.disabled);
