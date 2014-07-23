@@ -2,53 +2,62 @@ package game.edh;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 
 public class Assets {
 	public static Skin title;
 	public static Music music;
-	public static TextureAtlas titleAtlas;
-	public static BitmapFont TOfont;
-	public static BitmapFont mikachan;
+	static TextureAtlas titleAtlas;
+	static BitmapFont TOfont;
+	static BitmapFont mikachan;
 
 	public static final int MORUDAU = 0;
 	public static final int YUUGURE = 1;
+	public static final int NOISE = 2;
+	public static final int AKAIFUUSEN = 3;
+	public static final int ANTOINETTEN = 4;
+	public static final int HINOKAGERI = 5;
+	public static final int CHIISANA = 6;
+	public static final int THAIKOV = 7;
+	public static final int KAREHA = 8;
+
+	public static Sound[] effect = new Sound[8];
 
 	public static volatile boolean finishLoad = false;
 	public static boolean titleLoad = false;
-	public static boolean eventLoad = false;
-	public static boolean batleLoad = false;
 
 	public static void loadTitle() {
 		finishLoad = false;
-		titleAtlas = new TextureAtlas(Gdx.files.internal("data/title.pack"));
+		title = new Skin();
+
+		titleAtlas = new TextureAtlas(
+				Gdx.files.internal("data/images/title.pack"));
 
 		// フォントファイル、ラベルスタイルのスキン
-		TOfont = new BitmapFont(
-				Gdx.files.internal("data/font/TOfont.fnt"));
+		TOfont = new BitmapFont(Gdx.files.internal("data/font/TOfont.fnt"));
 		TOfont.setScale(1.2f);
-		title.add("TOfont", TOfont);
 
 		LabelStyle lbl = new LabelStyle(TOfont, Color.WHITE);
-		title.add("white", lbl);
+		title.add("TOfont", lbl, LabelStyle.class);
 
-		LabelStyle lbl2 = new LabelStyle(TOfont, Color.CYAN);
-		title.add("cyan", lbl2);
-
-		LabelStyle lbl3 = new LabelStyle(TOfont, Color.BLACK);
-		title.add("black", lbl3);
-
-		mikachan = new BitmapFont(
-				Gdx.files.internal("data/font/mikachan.fnt"));
+		mikachan = new BitmapFont(Gdx.files.internal("data/font/mikachan.fnt"));
 		mikachan.setScale(1.5f);
-		LabelStyle mikaLabel = new LabelStyle(mikachan, Color.BLACK);
+		LabelStyle mikaLabel = new LabelStyle(mikachan, Color.WHITE);
 		title.add("mikachan", mikaLabel);
 
 		// タイトル画面のバック、各ロゴのスキン
@@ -56,9 +65,9 @@ public class Assets {
 				titleAtlas.findRegion("titleback"));
 		title.add("titleback", TBack);
 
-		TextureRegion pause = new TextureRegion(
+		TextureRegionDrawable waku = new TextureRegionDrawable(
 				titleAtlas.findRegion("pausemenu"));
-		title.add("pause", pause);
+		title.add("waku", waku, Drawable.class);
 
 		TextureRegion TLRegion = new TextureRegion(
 				titleAtlas.findRegion("titlelogo"));
@@ -79,15 +88,60 @@ public class Assets {
 		TextureRegion back = new TextureRegion(titleAtlas.findRegion("back"));
 		title.add("back", back);
 
+		TextureRegionDrawable tanshoku = new TextureRegionDrawable(
+				titleAtlas.findRegion("tanshoku"));
+		title.add("tanshoku", tanshoku, TextureRegionDrawable.class);
+
+		// ノイズエフェクトのスキン
+		TextureRegionDrawable noise = new TextureRegionDrawable(
+				titleAtlas.findRegion("noise"));
+		title.add("noise", noise);
+
+		TextureRegionDrawable noise_line = new TextureRegionDrawable(
+				titleAtlas.findRegion("noise_line"));
+		title.add("noise_line", noise_line);
+
+		TextureRegionDrawable noise_dot = new TextureRegionDrawable(
+				titleAtlas.findRegion("noise_dot"));
+		title.add("noise_dot", noise_dot);
+
+		effect[0] = Gdx.audio.newSound(Gdx.files
+				.internal("data/music/effect/kettei.mp3"));
+
+		effect[1] = Gdx.audio.newSound(Gdx.files
+				.internal("data/music/effect/itemGet.mp3"));
+
+		effect[2] = Gdx.audio.newSound(Gdx.files
+				.internal("data/music/effect/page.mp3"));
+
+		effect[3] = Gdx.audio.newSound(Gdx.files
+				.internal("data/music/effect/awa.mp3"));
+
+		effect[4] = Gdx.audio.newSound(Gdx.files
+				.internal("data/music/effect/harau.mp3"));
+
+		effect[5] = Gdx.audio.newSound(Gdx.files
+				.internal("data/music/effect/kiru.mp3"));
+
+		effect[6] = Gdx.audio.newSound(Gdx.files
+				.internal("data/music/effect/ono.mp3"));
+
+		effect[7] = Gdx.audio.newSound(Gdx.files
+				.internal("data/music/effect/suzu.mp3"));
+
 		finishLoad = titleLoad = true;
 	}
 
-	public static TextureAtlas eventAtlas;
+	public static boolean eventLoad = false;
+	static TextureAtlas eventAtlas;
 	public static Skin event;
 
 	public static void loadEvent() {
 		finishLoad = false;
-		eventAtlas = new TextureAtlas(Gdx.files.internal("data/event.pack"));
+		event = new Skin();
+
+		eventAtlas = new TextureAtlas(
+				Gdx.files.internal("data/images/event.pack"));
 
 		// 主人公のスキン
 		Sprite s_aruku = new Sprite(eventAtlas.findRegion("s_aruku"));
@@ -114,12 +168,12 @@ public class Assets {
 		Sprite s_yokomuki = new Sprite(eventAtlas.findRegion("s_yokomuki"));
 		event.add("s_yokomuki", s_yokomuki, Sprite.class);
 
+		Sprite s_otona = new Sprite(eventAtlas.findRegion("s_otona"));
+		event.add("s_otona", s_otona, Sprite.class);
+
 		// 友人のスキン
 		Sprite y_aruku = new Sprite(eventAtlas.findRegion("y_aruku"));
 		event.add("y_aruku", y_aruku, Sprite.class);
-
-		Sprite y_hana = new Sprite(eventAtlas.findRegion("y_hana"));
-		event.add("y_hana", y_hana, Sprite.class);
 
 		Sprite y_miageru = new Sprite(eventAtlas.findRegion("y_miageru"));
 		event.add("y_miageru", y_miageru, Sprite.class);
@@ -133,157 +187,415 @@ public class Assets {
 		Sprite y_yokomuki = new Sprite(eventAtlas.findRegion("y_yokomuki"));
 		event.add("y_yokomuki", y_yokomuki, Sprite.class);
 
-		// 他キャラクターのスキン
-		Sprite inu = new Sprite(eventAtlas.findRegion("inu"));
-		event.add("inu", inu, Sprite.class);
-
-		Sprite ookami = new Sprite(eventAtlas.findRegion("ookami"));
-		event.add("ookami", ookami, Sprite.class);
+		TextureRegionDrawable inu = new TextureRegionDrawable(
+				eventAtlas.findRegion("inu"));
+		event.add("inu", inu, Drawable.class);
 
 		// イベント背景のスキン
-		TextureRegion spring = new TextureRegion(
+		TextureRegionDrawable spring = new TextureRegionDrawable(
 				eventAtlas.findRegion("spring"));
-		event.add("spring", spring);
+		event.add("spring", spring, Drawable.class);
 
-		TextureRegion summer = new TextureRegion(
+		TextureRegionDrawable summer = new TextureRegionDrawable(
 				eventAtlas.findRegion("summer"));
-		event.add("summer", summer);
+		event.add("summer", summer, Drawable.class);
 
-		TextureRegion fall = new TextureRegion(eventAtlas.findRegion("fall"));
-		event.add("fall", fall);
+		TextureRegionDrawable fall = new TextureRegionDrawable(
+				eventAtlas.findRegion("fall"));
+		event.add("fall", fall, Drawable.class);
 
-		TextureRegion winter = new TextureRegion(
+		TextureRegionDrawable winter = new TextureRegionDrawable(
 				eventAtlas.findRegion("winter"));
-		event.add("winter", winter);
+		event.add("winter", winter, Drawable.class);
 
-		TextureRegion ie = new TextureRegion(eventAtlas.findRegion("ie"));
-		event.add("ie", ie);
+		TextureRegionDrawable past = new TextureRegionDrawable(
+				eventAtlas.findRegion("past"));
+		event.add("past", past, Drawable.class);
+
+		TextureRegionDrawable ie = new TextureRegionDrawable(
+				eventAtlas.findRegion("ie"));
+		event.add("ie", ie, Drawable.class);
 
 		// その他イベントのスキン
-		TextureRegion eventback = new TextureRegion(
+		TextureRegionDrawable eventback = new TextureRegionDrawable(
 				eventAtlas.findRegion("eventback"));
-		event.add("eventback", eventback);
-
-		TextureRegion waku = new TextureRegion(eventAtlas.findRegion("waku"));
-		event.add("waku", waku);
+		event.add("eventback", eventback, Drawable.class);
 
 		finishLoad = eventLoad = true;
 	}
 
-	private static TextureAtlas batleAtlas;
-	public static Skin batle;
+	public static boolean gamesLoad = false;
+	static boolean gamesBaseLoad = false;
 
-	public static void loadBatle() {
+	public static Skin games;
+	static TextureAtlas gamesAtlas;
+
+	public static void loadGames(int stageNum) {
 		finishLoad = false;
-		batleAtlas = new TextureAtlas(Gdx.files.internal("data/batle.pack"));
 
-		// バトル背景、バックのスキン
-		TextureRegion batleback = new TextureRegion(
-				batleAtlas.findRegion("batleback"));
-		batle.add("batleback", batleback);
+		if (!gamesBaseLoad) {
+			// キャラクターのスキン
+			games = new Skin();
+			gamesAtlas = new TextureAtlas(
+					Gdx.files.internal("data/images/games.pack"));
 
-		TextureRegion spring1 = new TextureRegion(
-				batleAtlas.findRegion("spring1"));
-		batle.add("spring1", spring1);
+			Animation ue = new Animation(0.2f, gamesAtlas.findRegions("ue"));
+			ue.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+			Animation shita = new Animation(0.2f,
+					gamesAtlas.findRegions("sita"));
+			shita.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+			Animation hidari = new Animation(0.2f,
+					gamesAtlas.findRegions("hidari"));
+			hidari.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+			Animation migi = new Animation(0.2f, gamesAtlas.findRegions("migi"));
+			migi.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+			games.add("ue", ue, Animation.class);
+			games.add("shita", shita, Animation.class);
+			games.add("hidari", hidari, Animation.class);
+			games.add("migi", migi, Animation.class);
 
-		TextureRegion spring2 = new TextureRegion(
-				batleAtlas.findRegion("spring2"));
-		batle.add("spring2", spring2);
+			TextureRegion inu_hidari = gamesAtlas.findRegion("inu_hidari");
+			games.add("inu_hidari", inu_hidari, TextureRegion.class);
+			TextureRegion inu_migi = gamesAtlas.findRegion("inu_migi");
+			games.add("inu_migi", inu_migi, TextureRegion.class);
+			TextureRegion inu_shita = gamesAtlas.findRegion("inu_shita");
+			games.add("inu_shita", inu_shita, TextureRegion.class);
+			TextureRegion inu_ue = gamesAtlas.findRegion("inu_ue");
+			games.add("inu_ue", inu_ue, TextureRegion.class);
 
-		TextureRegion summer1 = new TextureRegion(
-				batleAtlas.findRegion("summer1"));
-		batle.add("summer1", summer1);
+			// ゲームアイテム等のスキン
+			TextureRegionDrawable memo = new TextureRegionDrawable(
+					gamesAtlas.findRegion("memo"));
+			games.add("memo", memo, TextureRegionDrawable.class);
 
-		TextureRegion summer2 = new TextureRegion(
-				batleAtlas.findRegion("summer2"));
-		batle.add("summer2", summer2);
+			TextureRegionDrawable memo_back = new TextureRegionDrawable(
+					gamesAtlas.findRegion("memo_back"));
+			games.add("memo_back", memo_back, TextureRegionDrawable.class);
 
-		TextureRegion fall1 = new TextureRegion(batleAtlas.findRegion("fall1"));
-		batle.add("fall1", fall1);
+			TextureRegionDrawable nabe = new TextureRegionDrawable(
+					gamesAtlas.findRegion("nabe"));
+			games.add("nabe", nabe, TextureRegionDrawable.class);
 
-		TextureRegion fall2 = new TextureRegion(batleAtlas.findRegion("fall2"));
-		batle.add("fall2", fall2);
+			TextureRegionDrawable key = new TextureRegionDrawable(
+					gamesAtlas.findRegion("Key"));
+			games.add("key", key, TextureRegionDrawable.class);
 
-		// エネミーのスキン
-		Sprite bat = new Sprite(batleAtlas.findRegion("bat"));
-		batle.add("bat", bat, Sprite.class);
+			TextureRegionDrawable kinomi1 = new TextureRegionDrawable(
+					gamesAtlas.findRegion("kinomi1"));
+			games.add("kinomi1", kinomi1, TextureRegionDrawable.class);
 
-		Sprite bear = new Sprite(batleAtlas.findRegion("bear"));
-		batle.add("bear", bear);
+			TextureRegionDrawable kinomi4 = new TextureRegionDrawable(
+					gamesAtlas.findRegion("kinomi4"));
+			games.add("kinomi4", kinomi4);
 
-		Sprite b_gost = new Sprite(batleAtlas.findRegion("bossgost"));
-		batle.add("b_gost", b_gost, Sprite.class);
+			TextureRegionDrawable hana = new TextureRegionDrawable(
+					gamesAtlas.findRegion("hana"));
+			games.add("hana", hana, TextureRegionDrawable.class);
 
-		Sprite b_kuma = new Sprite(batleAtlas.findRegion("bosskuma"));
-		batle.add("b_kuma", b_kuma, Sprite.class);
+			TextureRegionDrawable kusa = new TextureRegionDrawable(
+					gamesAtlas.findRegion("kusa"));
+			games.add("kusa", kusa, TextureRegionDrawable.class);
 
-		Sprite b_scor = new Sprite(batleAtlas.findRegion("bossscor"));
-		batle.add("b_scor", b_scor, Sprite.class);
+			TextureRegionDrawable ryouri = new TextureRegionDrawable(
+					gamesAtlas.findRegion("ryouri"));
+			games.add("ryouri", ryouri, TextureRegionDrawable.class);
 
-		Sprite b_wood = new Sprite(batleAtlas.findRegion("bosswood"));
-		batle.add("b_wood", b_wood, Sprite.class);
+			TextureRegionDrawable sara = new TextureRegionDrawable(
+					gamesAtlas.findRegion("sara"));
+			games.add("sara", sara, TextureRegionDrawable.class);
 
-		Sprite bug = new Sprite(batleAtlas.findRegion("bug"));
-		batle.add("bug", bug, Sprite.class);
+			TextureRegionDrawable ningyoAka = new TextureRegionDrawable(
+					gamesAtlas.findRegion("ningyoAka"));
+			games.add("ningyoAka", ningyoAka, TextureRegionDrawable.class);
 
-		Sprite fly = new Sprite(batleAtlas.findRegion("fly"));
-		batle.add("fly", fly, Sprite.class);
+			TextureRegionDrawable ningyoAo = new TextureRegionDrawable(
+					gamesAtlas.findRegion("ningyoAo"));
+			games.add("ningyoAo", ningyoAo, TextureRegionDrawable.class);
 
-		Sprite gost = new Sprite(batleAtlas.findRegion("gost"));
-		batle.add("gost", gost, Sprite.class);
+			TextureRegionDrawable inu = new TextureRegionDrawable(
+					gamesAtlas.findRegion("inu"));
+			games.add("inu", inu, TextureRegionDrawable.class);
 
-		Sprite mouse = new Sprite(batleAtlas.findRegion("mouse"));
-		batle.add("mouse", mouse, Sprite.class);
+			TextureRegionDrawable bou = new TextureRegionDrawable(
+					gamesAtlas.findRegion("bou"));
+			games.add("bou", bou, TextureRegionDrawable.class);
 
-		Sprite mush = new Sprite(batleAtlas.findRegion("mush"));
-		batle.add("mush", mush, Sprite.class);
+			TextureRegionDrawable tsurizao = new TextureRegionDrawable(
+					gamesAtlas.findRegion("turizao"));
+			games.add("tsurizao", tsurizao, TextureRegionDrawable.class);
 
-		Sprite obake = new Sprite(batleAtlas.findRegion("obake"));
-		batle.add("obake", obake, Sprite.class);
+			TextureRegionDrawable mTsurizao = new TextureRegionDrawable(
+					gamesAtlas.findRegion("map_tsurizao"));
+			games.add("mTsurizao", mTsurizao, TextureRegionDrawable.class);
 
-		Sprite pumpkin = new Sprite(batleAtlas.findRegion("pumpkin"));
-		batle.add("pumpkin", pumpkin, Sprite.class);
+			TextureRegionDrawable spice = new TextureRegionDrawable(
+					gamesAtlas.findRegion("spice"));
+			games.add("spice", spice, TextureRegionDrawable.class);
 
-		Sprite spiar = new Sprite(batleAtlas.findRegion("spiar"));
-		batle.add("spiar", spiar, Sprite.class);
+			TextureRegionDrawable taru = new TextureRegionDrawable(
+					gamesAtlas.findRegion("taru"));
+			games.add("taru", taru, TextureRegionDrawable.class);
 
-		Sprite wolf = new Sprite(batleAtlas.findRegion("wolf"));
-		batle.add("wolf", wolf, Sprite.class);
+			TextureRegionDrawable taru_b = new TextureRegionDrawable(
+					gamesAtlas.findRegion("taru_b"));
+			games.add("taru_b", taru_b, TextureRegionDrawable.class);
 
-		Sprite wood = new Sprite(batleAtlas.findRegion("wood"));
-		batle.add("wood", wood, Sprite.class);
+			TextureRegionDrawable kirikabu = new TextureRegionDrawable(
+					gamesAtlas.findRegion("kirikabu"));
+			games.add("kirikabu", kirikabu, TextureRegionDrawable.class);
 
-		// エフェクト、他スキン
-		TextureRegion clearbar = new TextureRegion(
-				batleAtlas.findRegion("clearbar"));
-		batle.add("clearbar", clearbar, TextureRegion.class);
+			TextureRegionDrawable kirikabu_yuki = new TextureRegionDrawable(
+					gamesAtlas.findRegion("kirikabu_yuki"));
+			games.add("kirikabu_yuki", kirikabu_yuki,
+					TextureRegionDrawable.class);
 
-		TextureRegion clearwaku = new TextureRegion(
-				batleAtlas.findRegion("clearwaku"));
-		batle.add("clearwaku", clearwaku);
+			TextureRegionDrawable maruta = new TextureRegionDrawable(
+					gamesAtlas.findRegion("maruta"));
+			games.add("maruta", maruta, TextureRegionDrawable.class);
 
-		TextureRegion hpbar = new TextureRegion(batleAtlas.findRegion("hpbar"));
-		batle.add("hpbar", hpbar, TextureRegion.class);
+			TextureRegionDrawable butter = new TextureRegionDrawable(
+					gamesAtlas.findRegion("butter"));
+			games.add("butter", butter, TextureRegionDrawable.class);
 
-		TextureRegion hpwaku = new TextureRegion(
-				batleAtlas.findRegion("hpwaku"));
-		batle.add("hpwaku", hpwaku);
+			TextureRegionDrawable houcho = new TextureRegionDrawable(
+					gamesAtlas.findRegion("houcho"));
+			games.add("houcho", houcho, TextureRegionDrawable.class);
 
-		TextureRegion pause = new TextureRegion(batleAtlas.findRegion("pause"));
-		batle.add("pause", pause);
+			TextureRegionDrawable mapTsurizao = new TextureRegionDrawable(
+					gamesAtlas.findRegion("map_tsurizao"));
+			games.add("mapTsurizao", mapTsurizao, TextureRegionDrawable.class);
 
-		TextureRegion ready = new TextureRegion(batleAtlas.findRegion("ready"));
-		batle.add("ready", ready);
+			TextureRegionDrawable nasu = new TextureRegionDrawable(
+					gamesAtlas.findRegion("nasu"));
+			games.add("nasu", nasu, TextureRegionDrawable.class);
 
-		Animation just = new Animation(0.1f, batleAtlas.findRegions("just"));
-		just.setPlayMode(Animation.NORMAL);
-		batle.add("just", just, Animation.class);
+			TextureRegionDrawable ninjin = new TextureRegionDrawable(
+					gamesAtlas.findRegion("ninjin"));
+			games.add("ninjin", ninjin, TextureRegionDrawable.class);
 
-		Animation hit = new Animation(0.1f, batleAtlas.findRegions("hit"));
-		just.setPlayMode(Animation.NORMAL);
-		batle.add("hit", hit, Animation.class);
+			TextureRegionDrawable sakana = new TextureRegionDrawable(
+					gamesAtlas.findRegion("sakana"));
+			games.add("sakana", sakana, TextureRegionDrawable.class);
 
-		finishLoad = batleLoad = true;
+			TextureRegionDrawable shaberu = new TextureRegionDrawable(
+					gamesAtlas.findRegion("shaberu"));
+			games.add("shaberu", shaberu, TextureRegionDrawable.class);
+
+			TextureRegionDrawable kanazuti = new TextureRegionDrawable(
+					gamesAtlas.findRegion("kanazuti"));
+			games.add("kanazuti", kanazuti, TextureRegionDrawable.class);
+
+			TextureRegionDrawable solt = new TextureRegionDrawable(
+					gamesAtlas.findRegion("solt"));
+			games.add("solt", solt, TextureRegionDrawable.class);
+
+			TextureRegionDrawable oil = new TextureRegionDrawable(
+					gamesAtlas.findRegion("oil"));
+			games.add("oil", oil, TextureRegionDrawable.class);
+
+			TextureRegionDrawable tamanegi = new TextureRegionDrawable(
+					gamesAtlas.findRegion("tamanegi"));
+			games.add("tamanegi", tamanegi, TextureRegionDrawable.class);
+
+			TextureRegionDrawable tamago = new TextureRegionDrawable(
+					gamesAtlas.findRegion("tamago"));
+			games.add("tamago", tamago, TextureRegionDrawable.class);
+
+			TextureRegionDrawable tomato = new TextureRegionDrawable(
+					gamesAtlas.findRegion("tomato"));
+			games.add("tomato", tomato, TextureRegionDrawable.class);
+
+			TextureRegionDrawable tebukuro = new TextureRegionDrawable(
+					gamesAtlas.findRegion("tebukuro"));
+			games.add("tebukuro", tebukuro, TextureRegionDrawable.class);
+
+			TextureRegionDrawable kakashi = new TextureRegionDrawable(
+					gamesAtlas.findRegion("kakashi"));
+			games.add("kakashi", kakashi, TextureRegionDrawable.class);
+
+			TextureRegionDrawable kinoko = new TextureRegionDrawable(
+					gamesAtlas.findRegion("kinoko"));
+			games.add("kinoko", kinoko, TextureRegionDrawable.class);
+
+			TextureRegionDrawable haka = new TextureRegionDrawable(
+					gamesAtlas.findRegion("haka"));
+			games.add("haka", haka, TextureRegionDrawable.class);
+
+			TextureRegionDrawable haka_hana = new TextureRegionDrawable(
+					gamesAtlas.findRegion("haka_hana"));
+			games.add("haka_hana", haka_hana, TextureRegionDrawable.class);
+
+			TextureRegionDrawable bed = new TextureRegionDrawable(
+					gamesAtlas.findRegion("bed"));
+			games.add("bed", bed, TextureRegionDrawable.class);
+
+			TextureRegionDrawable hako = new TextureRegionDrawable(
+					gamesAtlas.findRegion("hako"));
+			games.add("hako", hako, TextureRegionDrawable.class);
+
+			TextureRegionDrawable tsukue1 = new TextureRegionDrawable(
+					gamesAtlas.findRegion("tsukue1"));
+			games.add("tsukue1", tsukue1, TextureRegionDrawable.class);
+
+			TextureRegionDrawable tsukue2 = new TextureRegionDrawable(
+					gamesAtlas.findRegion("tsukue2"));
+			games.add("tsukue2", tsukue2, TextureRegionDrawable.class);
+
+			TextureRegionDrawable tana1 = new TextureRegionDrawable(
+					gamesAtlas.findRegion("tana1"));
+			games.add("tana1", tana1, TextureRegionDrawable.class);
+
+			TextureRegionDrawable tana2 = new TextureRegionDrawable(
+					gamesAtlas.findRegion("tana2"));
+			games.add("tana2", tana2, TextureRegionDrawable.class);
+
+			TextureRegionDrawable yukidaruma = new TextureRegionDrawable(
+					gamesAtlas.findRegion("yukidaruma"));
+			games.add("yukidaruma", yukidaruma, TextureRegionDrawable.class);
+
+			// ゲームのUI等のスキン
+			TextureRegionDrawable back = new TextureRegionDrawable(
+					gamesAtlas.findRegion("gameback"));
+			games.add("gameback", back, TextureRegionDrawable.class);
+
+			TextureRegionDrawable b_modoru_up = new TextureRegionDrawable(
+					gamesAtlas.findRegion("b_modoru_up"));
+			TextureRegionDrawable b_modoru_down = new TextureRegionDrawable(
+					gamesAtlas.findRegion("b_modoru_down"));
+			ButtonStyle b_modoru = new ButtonStyle(b_modoru_up, b_modoru_down,
+					b_modoru_up);
+			games.add("b_modoru", b_modoru, ButtonStyle.class);
+
+			TextureRegionDrawable b_kansei_up = new TextureRegionDrawable(
+					gamesAtlas.findRegion("b_kansei_up"));
+			TextureRegionDrawable b_kansei_down = new TextureRegionDrawable(
+					gamesAtlas.findRegion("b_kansei_down"));
+			ButtonStyle b_kansei = new ButtonStyle(b_kansei_up, b_kansei_down,
+					b_kansei_up);
+			games.add("b_kansei", b_kansei, ButtonStyle.class);
+
+			TextureRegionDrawable b_yes_up = new TextureRegionDrawable(
+					gamesAtlas.findRegion("b_yes_up"));
+			TextureRegionDrawable b_yes_down = new TextureRegionDrawable(
+					gamesAtlas.findRegion("b_yes_down"));
+			ButtonStyle b_yes = new ButtonStyle(b_yes_up, b_yes_down,
+					b_yes_down);
+			games.add("b_yes", b_yes, ButtonStyle.class);
+
+			TextureRegionDrawable b_no_up = new TextureRegionDrawable(
+					gamesAtlas.findRegion("b_no_up"));
+			TextureRegionDrawable b_no_down = new TextureRegionDrawable(
+					gamesAtlas.findRegion("b_no_down"));
+			ButtonStyle b_no = new ButtonStyle(b_no_up, b_no_down, b_no_down);
+			games.add("b_no", b_no, ButtonStyle.class);
+
+			// タッチパッドのスキン
+			TextureRegionDrawable pad = new TextureRegionDrawable(
+					gamesAtlas.findRegion("touchPad"));
+			TextureRegionDrawable knob = new TextureRegionDrawable(
+					gamesAtlas.findRegion("knob"));
+			TouchpadStyle style = new TouchpadStyle(pad, knob);
+			games.add("touchpad", style, TouchpadStyle.class);
+
+			games.add("black", pad, Drawable.class);
+
+			gamesBaseLoad = true;
+		}
+
+		loadMap(stageNum);
+
+		finishLoad = true;
+	}
+
+	static boolean mapLoad = false;
+
+	public static Skin map;
+	static Array<TiledMap> maps;
+
+	static void loadMap(int stageNum) {
+		TmxMapLoader loader = new TmxMapLoader();
+		map = new Skin();
+		maps = new Array<TiledMap>();
+
+		TiledMap house = loader.load("map/house.tmx");
+		map.add("house", house, TiledMap.class);
+		maps.add(house);
+
+		switch (stageNum) {
+		case 1:
+			TiledMap stage1 = loader.load("map/stage1.tmx");
+			map.add("stage1", stage1, TiledMap.class);
+			maps.add(stage1);
+			break;
+
+		case 2:
+			TiledMap stage2 = loader.load("map/stage2.tmx");
+			map.add("stage2", stage2, TiledMap.class);
+			maps.add(stage2);
+
+			TiledMap stage2_2 = loader.load("map/stage2_2.tmx");
+			map.add("stage2_2", stage2_2, TiledMap.class);
+			maps.add(stage2_2);
+
+			TiledMap stage2_3 = loader.load("map/stage2_3.tmx");
+			map.add("stage2_3", stage2_3, TiledMap.class);
+			maps.add(stage2_3);
+
+			TiledMap mayoinomiri = loader.load("map/mayoinomori.tmx");
+			map.add("mayoinomori", mayoinomiri, TiledMap.class);
+			maps.add(mayoinomiri);
+
+			TiledMap mizuumi = loader.load("map/mizuumi.tmx");
+			map.add("mizuumi", mizuumi, TiledMap.class);
+			maps.add(mizuumi);
+			break;
+
+		case 3:
+			TiledMap stage3 = loader.load("map/stage3.tmx");
+			map.add("stage3", stage3, TiledMap.class);
+			maps.add(stage3);
+
+			TiledMap stage3_2 = loader.load("map/stage3_2.tmx");
+			map.add("stage3_2", stage3_2, TiledMap.class);
+			maps.add(stage3_2);
+
+			TiledMap stage3_3 = loader.load("map/stage3_3.tmx");
+			map.add("stage3_3", stage3_3, TiledMap.class);
+			maps.add(stage3_3);
+
+			TiledMap stage3_4 = loader.load("map/stage3_4.tmx");
+			map.add("stage3_4", stage3_4, TiledMap.class);
+			maps.add(stage3_4);
+
+			TiledMap stage3_5 = loader.load("map/stage3_5.tmx");
+			map.add("stage3_5", stage3_5, TiledMap.class);
+			maps.add(stage3_5);
+			break;
+
+		case 4:
+			TiledMap stage4 = loader.load("map/stage4.tmx");
+			map.add("stage4", stage4, TiledMap.class);
+			maps.add(stage4);
+
+			TiledMap stage4_2 = loader.load("map/stage4_2.tmx");
+			map.add("stage4_2", stage4_2, TiledMap.class);
+			maps.add(stage4_2);
+
+			TiledMap stage4_3 = loader.load("map/stage4_3.tmx");
+			map.add("stage4_3", stage4_3, TiledMap.class);
+			maps.add(stage4_3);
+
+			TiledMap stage4_4 = loader.load("map/stage4_4.tmx");
+			map.add("stage4_4", stage4_4, TiledMap.class);
+			maps.add(stage4_4);
+
+			TiledMap stage4_house = loader.load("map/stage4_house.tmx");
+			map.add("stage4_house", stage4_house, TiledMap.class);
+			maps.add(stage4_house);
+			break;
+		}
+
+		mapLoad = true;
 	}
 
 	public static void loadMusic(int musicNumber) {
@@ -291,21 +603,45 @@ public class Assets {
 		case MORUDAU:
 			music = Gdx.audio.newMusic(Gdx.files
 					.internal("data/music/DieMoldau_Music_Box.mp3"));
-			music.setLooping(true);
 			break;
 		case YUUGURE:
 			music = Gdx.audio.newMusic(Gdx.files
 					.internal("data/music/yuugure.mp3"));
-			music.setLooping(true);
 			break;
+		case NOISE:
+			music = Gdx.audio.newMusic(Gdx.files
+					.internal("data/music/noise.mp3"));
+			break;
+		case AKAIFUUSEN:
+			music = Gdx.audio.newMusic(Gdx.files
+					.internal("data/music/akaifuusen.mp3"));
+			break;
+		case ANTOINETTEN:
+			music = Gdx.audio.newMusic(Gdx.files
+					.internal("data/music/antoinettenoniwa.mp3"));
+			break;
+		case HINOKAGERI:
+			music = Gdx.audio.newMusic(Gdx.files
+					.internal("data/music/hinokageri_orchestra.mp3"));
+			break;
+		case CHIISANA:
+			music = Gdx.audio.newMusic(Gdx.files
+					.internal("data/music/chiisanayorunokanashimi.mp3"));
+			break;
+		case THAIKOV:
+			music = Gdx.audio.newMusic(Gdx.files
+					.internal("data/music/tchaikovsky.mp3"));
+			break;
+		case KAREHA:
+			music = Gdx.audio.newMusic(Gdx.files
+					.internal("data/music/kareha.mp3"));
 		}
+
+		music.setLooping(true);
 	}
 
 	public static void initAssets() {
-		finishLoad = titleLoad = eventLoad = batleLoad = false;
-		title = new Skin();
-		event = new Skin();
-		batle = new Skin();
+		finishLoad = titleLoad = eventLoad = false;
 	}
 
 	public static void dispose() {
@@ -313,12 +649,12 @@ public class Assets {
 
 		disTitle();
 		disEvent();
-		disBatle();
-		
-		title = event = batle = null;
-		TOfont = mikachan = null;
+		disGames();
+		disStage();
 
-		music.dispose();
+		if (music != null)
+			music.dispose();
+		music = null;
 	}
 
 	public static void disTitle() {
@@ -328,7 +664,13 @@ public class Assets {
 			TOfont.dispose();
 			mikachan.dispose();
 			title.dispose();
+			for (int i = 0; i < effect.length; i++)
+				effect[i].dispose();
 		}
+
+		titleAtlas = null;
+		title = null;
+		TOfont = mikachan = null;
 	}
 
 	public static void disEvent() {
@@ -337,14 +679,33 @@ public class Assets {
 			eventAtlas.dispose();
 			event.dispose();
 		}
+
+		eventAtlas = null;
+		event = null;
 	}
 
-	public static void disBatle() {
-		if (batleLoad) {
-			batleLoad = false;
-			batleAtlas.dispose();
-			batle.dispose();
+	public static void disGames() {
+		if (gamesBaseLoad) {
+			gamesBaseLoad = false;
+			gamesAtlas.dispose();
+			games.dispose();
 		}
+
+		gamesAtlas = null;
+		games = null;
+	}
+
+	public static void disStage() {
+		if (mapLoad) {
+			mapLoad = false;
+			map.dispose();
+
+			for (TiledMap map : maps) {
+				map.dispose();
+			}
+			maps.clear();
+		}
+		map = null;
 	}
 
 }

@@ -1,0 +1,89 @@
+
+image/title.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+titleback
+  rotate: false
+  xy: 1, 255
+  size: 432, 768
+  orig: 432, 768
+  offset: 0, 0
+  index: -1
+pausemenu
+  rotate: false
+  xy: 1, 1
+  size: 385, 252
+  orig: 385, 252
+  offset: 0, 0
+  index: -1
+noise
+  rotate: false
+  xy: 435, 608
+  size: 228, 415
+  orig: 228, 415
+  offset: 0, 0
+  index: -1
+titlelogo
+  rotate: false
+  xy: 665, 831
+  size: 340, 192
+  orig: 340, 192
+  offset: 0, 0
+  index: -1
+noise_line
+  rotate: false
+  xy: 435, 6
+  size: 1, 600
+  orig: 1, 600
+  offset: 0, 0
+  index: -1
+stagelogo
+  rotate: false
+  xy: 665, 710
+  size: 186, 119
+  orig: 186, 119
+  offset: 0, 0
+  index: -1
+settinglogo
+  rotate: false
+  xy: 438, 538
+  size: 225, 68
+  orig: 225, 68
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 665, 607
+  size: 124, 101
+  orig: 124, 101
+  offset: 0, 0
+  index: -1
+scorelogo
+  rotate: false
+  xy: 853, 761
+  size: 147, 68
+  orig: 147, 68
+  offset: 0, 0
+  index: -1
+heoplogo
+  rotate: false
+  xy: 438, 461
+  size: 126, 75
+  orig: 126, 75
+  offset: 0, 0
+  index: -1
+tanshoku
+  rotate: false
+  xy: 665, 538
+  size: 68, 67
+  orig: 68, 67
+  offset: 0, 0
+  index: -1
+noise_dot
+  rotate: false
+  xy: 388, 219
+  size: 30, 34
+  orig: 30, 34
+  offset: 0, 0
+  index: -1

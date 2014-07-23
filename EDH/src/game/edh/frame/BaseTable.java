@@ -44,7 +44,12 @@ public abstract class BaseTable extends Table {
 			public void run() {
 				// TODO 自動生成されたメソッド・スタブ
 				setTouchable(Touchable.enabled);
+				showTable();
 			}
 		})));
 	}
+	
+	public abstract void backPress();
+	
+	protected abstract void showTable();
 }

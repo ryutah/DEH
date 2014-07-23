@@ -7,7 +7,6 @@ public class Main {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "DEH";
-		cfg.useGL20 = false;
 		cfg.width = 432;
 		cfg.height = 768;
 		

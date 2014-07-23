@@ -2,15 +2,20 @@ package game.edh;
 
 public class Settings {
 	public boolean sound;
-	public boolean vibrate;
+	public boolean autoSave;
 	
-	public int nowStage;
+	public boolean[] clearStage;
 	
 	public Settings() {
 		// TODO 自動生成されたコンストラクター・スタブ
 		sound = true;
-		vibrate = true;
+		autoSave = false;
 		
-		nowStage = 4;
+		clearStage = new boolean[4];
+	}
+
+	public void clearStage(int stageNum) {
+		int num = stageNum - 1;
+		clearStage[num] = true;
 	}
 }
