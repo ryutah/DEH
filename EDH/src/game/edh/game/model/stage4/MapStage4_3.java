@@ -1,16 +1,16 @@
 package game.edh.game.model.stage4;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
-
 import game.edh.Assets;
 import game.edh.game.model.frame.GameWorld;
+import game.edh.game.model.frame.GamesFlag.Stage4Flag;
 import game.edh.game.model.frame.Map;
 import game.edh.game.model.frame.MapChangeRect;
 import game.edh.game.model.frame.MapObject;
-import game.edh.game.model.frame.GamesFlag.Stage4Flag;
 import game.edh.game.model.frame.ModelGameChara.GameCharaDir;
 import game.edh.game.model.stage4.objs.map43.Map43HakaObj;
 import game.edh.game.model.stage4.objs.map43.Map43WallObj;
+
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 public class MapStage4_3 extends Map {
 	public static final String NAME = "Stage43";
@@ -31,7 +31,7 @@ public class MapStage4_3 extends Map {
 		MapChangeRect rect2 = new MapChangeRect(6, 19.5f, 3, .5f,
 				MapStage4_2.NAME);
 		addMapChangeRect(rect2);
-		
+
 		MapObject haka = new Map43HakaObj(world);
 		MapObject wall = new Map43WallObj(world);
 		addObjes(haka, wall);
@@ -63,6 +63,7 @@ public class MapStage4_3 extends Map {
 	@Override
 	public void update(float delta) {
 		// TODO 自動生成されたメソッド・スタブ
+		super.update(delta);
 		if (!remLayer && world.getFlag(Stage4Flag.HAKA_HANA)) {
 			removeBackLayer("ground3");
 			removeFrontLayers("foreground2");

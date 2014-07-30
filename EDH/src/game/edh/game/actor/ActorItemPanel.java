@@ -1,5 +1,6 @@
 package game.edh.game.actor;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import game.edh.Assets;
 import game.edh.game.model.frame.GameWorld;
 import game.edh.game.model.items.Items;
@@ -11,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class ActorItemPanel extends Table {
 	GameWorld world;
@@ -45,7 +44,7 @@ public class ActorItemPanel extends Table {
 
 		ScrollPane pane = new ScrollPane(table);
 		add(pane).spaceTop(20).padBottom(50);
-		
+
 		for(Items item : world.getItems().getItems()) {
 			addItem(item);
 		}
@@ -65,7 +64,7 @@ public class ActorItemPanel extends Table {
 				break;
 			}
 		}
-		
+
 		Array<Actor> buf = new Array<Actor>();
 		buf.addAll(table.getChildren());
 		table.clearChildren();
@@ -76,41 +75,44 @@ public class ActorItemPanel extends Table {
 			}
 		}
 	}
-	
+
 	public void fling(boolean left) {
+		if(getActions().size != 0)
+			return;
+
 		if(left) {
 			if(show && leftSide)
 				hideLeftSide();
-			else
+			else if (!show)
 				showRightSide();
 		} else {
 			if(!show && !leftSide)
 				showLeftSide();
-			else
+			else if (show && !leftSide)
 				hideRightSide();
 		}
 	}
-	
+
 	void showLeftSide() {
 		setPosition(-200, 152);
 		addAction(moveTo(0, 152, .3f));
 		show = true;
 		leftSide = true;
 	}
-	
+
 	void hideLeftSide() {
 		addAction(moveTo(-200, 152, .3f));
 		leftSide = false;
 		show = false;
 	}
-	
+
 	void showRightSide() {
 		setPosition(472, 152);
 		addAction(moveTo(272, 152, .3f));
 		show = true;
 		leftSide = false;
 	}
-	
+
 	void hideRightSide() {
 		addAction(moveTo(472, 152, .3f));
 		leftSide = false;

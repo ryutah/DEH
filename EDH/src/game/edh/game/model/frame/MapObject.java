@@ -29,9 +29,8 @@ public class MapObject {
 		this.world = world;
 		check = true;
 	}
-	
+
 	public void update(float delta) {
-		
 	}
 
 	public void checkObj() {
@@ -41,7 +40,7 @@ public class MapObject {
 	public void setBounds(float x, float y, float width, float height) {
 		bounds.set(x, y, width, height);
 	}
-	
+
 	public void setPosition(float x, float y) {
 		bounds.setPosition(x, y);
 	}
@@ -49,19 +48,19 @@ public class MapObject {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public void setCollision(boolean collision) {
 		this.collision = collision;
 	}
-	
+
 	public void setCheck(boolean check) {
 		this.check = check;
 	}
-	
+
 	public void setDraw(boolean draw) {
 		this.draw = draw;
 	}
-	
+
 	public void setDrawable(Drawable drawable) {
 		this.drawable = drawable;
 		draw = true;
@@ -74,11 +73,11 @@ public class MapObject {
 	public String getName() {
 		return name;
 	}
-	
+
 	public Drawable getDrawable() {
 		return drawable;
 	}
-	
+
 	public void remove() {
 		remove = true;
 	}

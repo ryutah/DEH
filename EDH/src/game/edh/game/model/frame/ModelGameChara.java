@@ -7,13 +7,13 @@ public class ModelGameChara {
 	public enum GameCharaDir {
 		Left, Right, Up, Down
 	}
-	
+
 	public static int MOVE = 0;
 	public static int STAND = 1;
 
 	String name;
 	boolean remove;
-	
+
 	Vector2 position;
 	Vector2 moveSpeed;
 	GameCharaDir dir;
@@ -35,7 +35,7 @@ public class ModelGameChara {
 		check = new Rectangle();
 		dir = GameCharaDir.Left;
 		state = STAND;
-		
+
 		remove = false;
 	}
 
@@ -50,26 +50,26 @@ public class ModelGameChara {
 		bounds.y += moveY;
 		state = MOVE;
 	}
-	
+
 	/**
 	 * プレイヤーを停止させる
 	 */
 	public void stop() {
 		state = STAND;
 	}
-	
+
 	public void check() {
-		
+
 	}
-	
+
 	public void update(float delta) {
-		
+
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public void setDirection(float degree) {
 		if (Math.abs(degree) <= 45)
 			dir = GameCharaDir.Right;
@@ -94,11 +94,11 @@ public class ModelGameChara {
 	public void setDirection(GameCharaDir dir) {
 		this.dir = dir;
 	}
-	
+
 	public void setSpeed(float x, float y) {
 		moveSpeed.set(x, y);
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -106,7 +106,7 @@ public class ModelGameChara {
 	public Vector2 getPosition() {
 		return position;
 	}
-	
+
 	public Vector2 getSpeed() {
 		return moveSpeed;
 	}
@@ -123,25 +123,25 @@ public class ModelGameChara {
 
 		switch (dir) {
 		case Left:
-			check.set(x - 1, y, width + 1, height);
+			check.set(x - .5f, y, width + .5f, height);
 			break;
 		case Right:
-			check.set(x, y, width + 1, height);
+			check.set(x, y, width + .5f, height);
 			break;
 		case Up:
-			check.set(x, y, width, height + 1);
+			check.set(x, y, width, height + .5f);
 			break;
 		case Down:
-			check.set(x, y - 1, width, height + 1);
+			check.set(x, y - .5f, width, height + .5f);
 			break;
 		}
 		return check;
 	}
-	
+
 	public int getState() {
 		return state;
 	}
-	
+
 	public GameCharaDir getDirection() {
 		return dir;
 	}

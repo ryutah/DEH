@@ -1,8 +1,8 @@
 package game.edh.actors;
 
-import java.util.Calendar;
-
 import game.edh.Assets;
+
+import java.util.Calendar;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
