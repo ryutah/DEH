@@ -1,5 +1,6 @@
 package game.edh.game.actor;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import game.edh.Assets;
 import game.edh.game.model.frame.GameWorld;
 import game.edh.game.model.frame.ModelInu;
@@ -8,8 +9,6 @@ import game.edh.game.model.frame.ModelInu.InuDir;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class ActorInu extends Actor {
 	GameWorld world;
@@ -32,6 +31,8 @@ public class ActorInu extends Actor {
 
 		checkDir();
 		draw = inu.draw;
+		if(draw)
+			setColor(1, 1, 1, 1);
 	}
 
 	void checkDir() {

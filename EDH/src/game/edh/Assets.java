@@ -12,8 +12,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -104,6 +105,19 @@ public class Assets {
 		TextureRegionDrawable noise_dot = new TextureRegionDrawable(
 				titleAtlas.findRegion("noise_dot"));
 		title.add("noise_dot", noise_dot);
+
+		Drawable sliderKnob = new TextureRegionDrawable(
+				titleAtlas.findRegion("slideKey"));
+		Drawable sliderBack = new TextureRegionDrawable(
+				titleAtlas.findRegion("slideBack"));
+		SliderStyle style = new SliderStyle(sliderBack, sliderKnob);
+		title.add("default-horizontal", style, SliderStyle.class);
+
+		Drawable knob = new TextureRegionDrawable(titleAtlas.findRegion("knob"));
+		Drawable pad = new TextureRegionDrawable(
+				titleAtlas.findRegion("touchPad"));
+		TouchpadStyle pStyle = new TouchpadStyle(pad, knob);
+		title.add("default", pStyle, TouchpadStyle.class);
 
 		effect[0] = Gdx.audio.newSound(Gdx.files
 				.internal("data/music/effect/kettei.mp3"));

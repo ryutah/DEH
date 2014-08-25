@@ -1,13 +1,12 @@
 package game.edh.game.actor;
 
+import game.edh.game.model.frame.event.ModelEventObj;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.utils.Pools;
-import game.edh.game.model.frame.event.ModelEventObj;
 
 public class EventImage extends Image implements EventComponent {
 	ModelEventObj obj;
@@ -22,20 +21,20 @@ public class EventImage extends Image implements EventComponent {
 					int button) {
 				// TODO 自動生成されたメソッド・スタブ
 				event.stop();
-				if (getParent() instanceof ActorEvent) {
-					Vector2 v = Pools.obtain(Vector2.class);
-					v.set(x, y);
-					((ActorEvent) getParent()).localePos(v);
-					v.sub(getX(), getY());
-					Gdx.app.log("ActorPos", getX() + ", " + getY());
-					EventImage.this.obj.tap(v.x, v.y);
-
-					Gdx.app.log("Tap", v.x + ", " + v.y);
-					Pools.free(v);
-				} else
+//				if (getParent() instanceof ActorEvent) {
+//					Vector2 v = Pools.obtain(Vector2.class);
+//					v.set(x, y);
+//					((ActorEvent) getParent()).localePos(v);
+//					v.sub(getX(), getY());
+//					Gdx.app.log("ActorPos", getX() + ", " + getY());
+//					EventImage.this.obj.tap(v.x, v.y);
+//
+//					Gdx.app.log("Tap", v.x + ", " + v.y);
+//					Pools.free(v);
+//				} else
 					EventImage.this.obj.tap(x, y);
 			}
-			
+
 			@Override
 			public boolean longPress(Actor actor, float x, float y) {
 				// TODO 自動生成されたメソッド・スタブ

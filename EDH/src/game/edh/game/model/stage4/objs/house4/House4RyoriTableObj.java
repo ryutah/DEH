@@ -1,8 +1,8 @@
 package game.edh.game.model.stage4.objs.house4;
 
 import game.edh.game.model.frame.GameWorld;
-import game.edh.game.model.frame.MapObject;
 import game.edh.game.model.frame.GamesFlag.Stage4Flag;
+import game.edh.game.model.frame.MapObject;
 import game.edh.game.model.items.ItemsHandler;
 import game.edh.game.model.stage4.event.MapEventRyouri;
 
@@ -20,6 +20,7 @@ public class House4RyoriTableObj extends MapObject {
 		if (world.getSelectItem() == ItemsHandler.RYOURI_SEIKO) {
 			world.removeItem(ItemsHandler.RYOURI_SEIKO);
 			world.changeFlag(Stage4Flag.PUT_RYORI, true);
+			setCheck(false);
 			world.addMapEvent(new MapEventRyouri(world, world.getMap()));
 		} else if (world.getSelectItem() == ItemsHandler.RYOURI_SHIPPAI) {
 			world.removeItem(ItemsHandler.RYOURI_SHIPPAI);

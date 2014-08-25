@@ -19,26 +19,27 @@ public class ModelEvent {
 		this.world = world;
 		objs = new Array<ModelEventObj>();
 	}
-	
+
 	public void addObjs(ModelEventObj obj) {
 		objs.add(obj);
 	}
-	
+
 	public void startEvent() {
+
 	}
 
 	public void endEvent() {
-		
+
 	}
-	
+
 	public void addListener(ActorEvent listener) {
 		this.listener = listener;
 	}
-	
+
 	public GameWorld getWorld() {
 		return world;
 	}
-	
+
 	public Array<ModelEventObj> getObjs() {
 		return objs;
 	}

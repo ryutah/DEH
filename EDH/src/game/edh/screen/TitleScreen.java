@@ -1,7 +1,5 @@
 package game.edh.screen;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import game.edh.Assets;
 import game.edh.EdhGame;
 import game.edh.frame.BaseScreen;
@@ -9,6 +7,9 @@ import game.edh.frame.BaseTable;
 import game.edh.title.actor.EventDemoTable;
 import game.edh.title.actor.MenuTable;
 import game.edh.title.actor.StageTitleTable;
+
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class TitleScreen extends BaseScreen {
 	public enum TableType {

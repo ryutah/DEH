@@ -25,7 +25,7 @@ public class ModelText {
 				state = 0;
 			}
 		}
-		
+
 		if(bufText != null && text == null) {
 			setText(bufText);
 			bufText = null;

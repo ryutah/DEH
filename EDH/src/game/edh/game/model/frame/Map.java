@@ -63,8 +63,39 @@ public abstract class Map {
 		}
 	}
 
-	public boolean collision(Rectangle rect) {
+	boolean collision(Rectangle rect) {
 		return collisionWall(rect) || collisionObj(rect);
+	}
+
+	public Vector2 checkCollision(Rectangle player, float moveX, float moveY) {
+		Vector2 pos = Pools.obtain(Vector2.class);
+		pos.set(0, 0);
+		Rectangle rect = Pools.obtain(Rectangle.class);
+		rect.set(player);
+		rect.setPosition(rect.getX() + moveX, rect.getY() + moveY);
+		if (!collision(rect)) {
+			pos.set(moveX, moveY);
+			Pools.free(rect);
+			return pos;
+		}
+
+		rect.setX(player.getX());
+		if (!collision(rect)) {
+			pos.set(0, moveY);
+			Pools.free(rect);
+			return pos;
+		}
+
+		rect.setX(player.getX() + moveX);
+		rect.setY(player.getY());
+		if (!collision(rect)) {
+			pos.set(moveX, 0);
+			Pools.free(rect);
+			return pos;
+		}
+
+		Pools.free(pos);
+		return pos;
 	}
 
 	public void checkMapChange(Rectangle rect) {
@@ -152,12 +183,12 @@ public abstract class Map {
 
 	protected void setInitPos(float x, float y) {
 		initPos.set(x, y);
-//		changePos.set(x, y);
+		// changePos.set(x, y);
 	}
 
 	protected void setInitDir(GameCharaDir dir) {
 		this.initDir = dir;
-//		changeDir = initDir;
+		// changeDir = initDir;
 	}
 
 	public void addBackLayers(String name) {
@@ -249,16 +280,16 @@ public abstract class Map {
 	public Array<MapObject> getObjs() {
 		return objs;
 	}
-	
+
 	public MapObject getObj(String name) {
 		MapObject obj = null;
-		for(MapObject object : objs) {
-			if(name.equals(object.getName())) {
+		for (MapObject object : objs) {
+			if (name.equals(object.getName())) {
 				obj = object;
 				break;
 			}
 		}
-		
+
 		return obj;
 	}
 

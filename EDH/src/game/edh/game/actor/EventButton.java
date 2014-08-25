@@ -1,12 +1,10 @@
 package game.edh.game.actor;
 
-import com.badlogic.gdx.math.Vector2;
+import game.edh.game.model.frame.event.ModelEventObj;
+
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Pools;
-
-import game.edh.game.model.frame.event.ModelEventObj;
 
 public class EventButton extends Button implements EventComponent {
 	ModelEventObj obj;
@@ -14,19 +12,18 @@ public class EventButton extends Button implements EventComponent {
 	public EventButton(ModelEventObj obj) {
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.obj = obj;
-		
+
 		addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				// TODO 自動生成されたメソッド・スタブ
 				event.stop();
-				event.stop();
-				Vector2 v = Pools.obtain(Vector2.class);
-				v.set(x, y);
-				((ActorEvent) getParent()).localePos(v);
-				v.sub(getX(), getY());
-				EventButton.this.obj.tap(v.x, v.y);
-				Pools.free(v);
+//				Vector2 v = Pools.obtain(Vector2.class);
+//				v.set(x, y);
+//				((ActorEvent) getParent()).localePos(v);
+//				v.sub(getX(), getY());
+				EventButton.this.obj.tap(x, y);
+//				Pools.free(v);
 			}
 		});
 

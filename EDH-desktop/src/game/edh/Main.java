@@ -9,7 +9,7 @@ public class Main {
 		cfg.title = "DEH";
 		cfg.width = 432;
 		cfg.height = 768;
-		
+
 		new LwjglApplication(new EdhGame(), cfg);
 	}
 }

@@ -1,15 +1,15 @@
 package game.edh.game.model.frame.event;
 
-import java.util.Arrays;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Array;
-
 import game.edh.Assets;
 import game.edh.EdhGame;
 import game.edh.MusicHandler.EfftctType;
 import game.edh.game.model.frame.GameWorld;
 import game.edh.game.model.items.ItemsHandler;
+
+import java.util.Arrays;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
 
 public abstract class EventRyouri extends ModelEvent {
 	protected final int SPICE = 0;
@@ -29,6 +29,7 @@ public abstract class EventRyouri extends ModelEvent {
 	Array<ModelEventObj> tableObj;
 	int[] colectId;
 	protected int[] inId;
+	boolean addShokuzai;
 
 	class ButtonKansei extends ModelEventObj {
 		public ButtonKansei(ModelEvent parent) {
@@ -44,7 +45,7 @@ public abstract class EventRyouri extends ModelEvent {
 			// TODO 自動生成されたメソッド・スタブ
 			((EventRyouri) parent).kansei();
 		}
-		
+
 	}
 
 	class Nabe extends ModelEventObj {
@@ -62,14 +63,13 @@ public abstract class EventRyouri extends ModelEvent {
 			// TODO 自動生成されたメソッド・スタブ
 			world.textEvent("鍋に料理を入れれば何か料理が作れそう");
 		}
-		
 
 		@Override
 		protected boolean flingAction(float velocityX, float velocityY) {
 			// TODO 自動生成されたメソッド・スタブ
 			return false;
 		}
-		
+
 		@Override
 		protected boolean longTapAction() {
 			// TODO 自動生成されたメソッド・スタブ
@@ -115,7 +115,7 @@ public abstract class EventRyouri extends ModelEvent {
 	public void setColectId(int[] ids) {
 		colectId = ids;
 		Arrays.sort(colectId);
-		for(int i : ids) {
+		for (int i : ids) {
 			Gdx.app.log("SEIKAI", i + "");
 		}
 	}
@@ -130,7 +130,7 @@ public abstract class EventRyouri extends ModelEvent {
 			inId[inId.length - 1] = id;
 			Arrays.sort(inId);
 		}
-		for(int i : inId) {
+		for (int i : inId) {
 			Gdx.app.log("IN", i + "");
 		}
 	}
@@ -163,5 +163,21 @@ public abstract class EventRyouri extends ModelEvent {
 
 	public Array<ModelEventObj> getTableObj() {
 		return tableObj;
+	}
+
+	public void addShokuzai() {
+		addShokuzai = true;
+	}
+
+	protected void addShokuzai(int id, String name, String drawableName) {
+		addTableObj(id, name, drawableName);
+		addShokuzai = true;
+	}
+
+	@Override
+	public void startEvent() {
+		// TODO 自動生成されたメソッド・スタブ
+		if (addShokuzai)
+			world.textEvent("料理の材料を追加した");
 	}
 }

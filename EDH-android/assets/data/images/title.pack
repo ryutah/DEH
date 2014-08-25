@@ -52,38 +52,66 @@ settinglogo
   orig: 225, 68
   offset: 0, 0
   index: -1
+touchPad
+  rotate: false
+  xy: 665, 580
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 back
   rotate: false
-  xy: 665, 607
+  xy: 853, 728
   size: 124, 101
   orig: 124, 101
   offset: 0, 0
   index: -1
 scorelogo
   rotate: false
-  xy: 853, 761
+  xy: 438, 468
   size: 147, 68
   orig: 147, 68
   offset: 0, 0
   index: -1
 heoplogo
   rotate: false
-  xy: 438, 461
+  xy: 438, 391
   size: 126, 75
   orig: 126, 75
   offset: 0, 0
   index: -1
+slideBack
+  rotate: false
+  xy: 665, 570
+  size: 128, 8
+  orig: 128, 8
+  offset: 0, 0
+  index: -1
 tanshoku
   rotate: false
-  xy: 665, 538
+  xy: 587, 469
   size: 68, 67
   orig: 68, 67
   offset: 0, 0
   index: -1
+knob
+  rotate: false
+  xy: 388, 218
+  size: 35, 35
+  orig: 35, 35
+  offset: 0, 0
+  index: -1
 noise_dot
   rotate: false
-  xy: 388, 219
+  xy: 795, 674
   size: 30, 34
   orig: 30, 34
+  offset: 0, 0
+  index: -1
+slideKey
+  rotate: false
+  xy: 853, 710
+  size: 24, 16
+  orig: 24, 16
   offset: 0, 0
   index: -1

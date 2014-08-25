@@ -6,8 +6,8 @@ import game.edh.screen.LoadScreen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -28,7 +28,7 @@ public class EdhGame extends Game {
 		music = new MusicHandler(this);
 		Assets.initAssets();
 		settings = load();
-		gameData = loadFile();
+		loadFile();
 
 		Gdx.app.log("LyfeCycle", "Create");
 		stage = new Stage(new StretchViewport(432, 768));
@@ -93,27 +93,26 @@ public class EdhGame extends Game {
 		}
 	}
 
-	public static GameData loadFile() {
+	public static void loadFile() {
 		Json json = Pools.obtain(Json.class);
 		try {
 			json = Pools.obtain(Json.class);
 			String file = Gdx.files.local(".GameData").readString();
 //			Gdx.app.log("LoadData", json.prettyPrint(file));
-			GameData data = json.fromJson(GameData.class, file);
-			return data;
+			gameData = json.fromJson(GameData.class, file);
 		} catch (Exception e) {
-			return null;
+			gameData = null;
 		} finally {
 			Pools.free(json);
 		}
 	}
-	
+
 	public static void deleteData() {
 		try{
 			Gdx.files.local(".GameData").delete();
 			gameData = null;
 		} catch(Exception e) {
-			
+
 		}
 	}
 

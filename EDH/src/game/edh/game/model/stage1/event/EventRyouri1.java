@@ -15,12 +15,12 @@ public class EventRyouri1 extends EventRyouri {
 
 		boolean kinomi = world.getFlag(Stage1Flag.RYORI_IN_KINOMI);
 		boolean kusa = world.getFlag(Stage1Flag.RYORI_IN_KUSA);
-		
+
 		if (!kinomi) {
 			if (world.getItems().findItem(ItemsHandler.KINOMI_1)) {
 				world.removeItem(ItemsHandler.KINOMI_1);
 				world.changeFlag(Stage1Flag.RYORI_IN_KINOMI, true);
-				addTableObj(KINOMI, "きのみ", "kinomi1");
+				addShokuzai(KINOMI, "きのみ", "kinomi1");
 			}
 		} else
 			addTableObj(KINOMI, "きのみ", "kinomi1");
@@ -29,10 +29,9 @@ public class EventRyouri1 extends EventRyouri {
 			if (world.getItems().findItem(ItemsHandler.KUSA)) {
 				world.removeItem(ItemsHandler.KUSA);
 				world.changeFlag(Stage1Flag.RYORI_IN_KUSA, true);
-				addTableObj(KUSA, "山草", "kusa");
+				addShokuzai(KUSA, "山草", "kusa");
 			}
 		} else
 			addTableObj(KUSA, "山草", "kusa");
-
 	}
 }

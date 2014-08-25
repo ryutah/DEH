@@ -14,8 +14,8 @@ public class Event4 extends EventWorld {
 	String[] texts5 = { "青い少女は微笑んで言いました", "『そうね、きっと今日中にできるものね』",
 			"『じゃあまた私の家に行きましょうか』", "『そうだ、出来上がったらぜひあなたのお家に持って帰って』",
 			"『あなた犬をほしがってたでしょう？\n本物ではないけれど、いっぱい可愛がってあげて』",
-			"『…でもたまにはわたしにも合わせてね？』" };
-	
+			"『…でもたまにはわたしにも会わせてね？』" };
+
 	int eventNum;
 	Character s;
 	Character y;
@@ -27,18 +27,18 @@ public class Event4 extends EventWorld {
 		s.setPosition(20, 0);
 		s.setState(CharaS.ARUKU);
 		s.setDirection(CharaDirection.LEFT);
-		
+
 		y = new CharaY(this);
 		y.setDirection(CharaDirection.RIGHT);
 		y.setState(CharaY.YOKOMUKI);
 		y.setPosition(2, 0);
 		y.setShow(true);
-		
+
 		addEventChara(s, y);
-		
+
 		setBackName("fall");
 		text.setText(texts1);
-		
+
 		eventNum = 0;
 	}
 
@@ -104,7 +104,7 @@ public class Event4 extends EventWorld {
 			startText();
 			break;
 		}
-		
+
 		eventNum++;
 	}
 

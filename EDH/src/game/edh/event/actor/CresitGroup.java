@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -29,15 +29,15 @@ public class CresitGroup extends Group {
 			+ "http://inabausa.s81.xrea.com/haihu/haihu.html\n\n"
 			+ "素材のプチッチ\n"
 			+ "http://putiya.com/index.html";
-	
+
 	String text5 = "効果音\n\n"
 			+ "On-Jin ～音人～\n"
 			+ "http://on-jin.com/";
-	
+
 	String text6 = "イベントキャラクター、背景\n\n"
 			+ "SILHUIETTE DESIGN\n"
 			+ "http://kage-design.com/wp/";
-	
+
 	String text7 = "BGM\n\n"
 			+ "甘茶の音楽工房\n"
 			+ "http://amachamusic.chagasi.com/"
@@ -50,7 +50,7 @@ public class CresitGroup extends Group {
 			+ "音楽研究会\n"
 			+ "http://www.asahi-net.or.jp/~HB9T-KTD/music/musj.html\n"
 			+ "「DieMoldau_Music_Box」";
-	
+
 	String text8 = "その他\n"
 			+ "画面ノイズ\n\n"
 			+ "回想領域\n"
@@ -64,11 +64,11 @@ public class CresitGroup extends Group {
 			+ "フレームワーク\n\n"
 			+ "libGDX\n"
 			+ "http://libgdx.badlogicgames.com/";
-	
+
 	String text9 = "E N D";
-	
+
 	Table table;
-	
+
 	public CresitGroup() {
 		// TODO 自動生成されたコンストラクター・スタブ
 		setStage(EdhGame.stage);
@@ -77,24 +77,24 @@ public class CresitGroup extends Group {
 		image.setColor(Color.BLACK);
 		image.setFillParent(true);
 		addActor(image);
-		
+
 		table = new Table();
 		table.setFillParent(true);
-		table.setPosition(0, -1400);
+		table.setPosition(0, -1500);
 		table.align(Align.left);
 		addActor(table);
-		
+
 		LabelStyle style = Assets.title.get("mikachan", LabelStyle.class);
-		
+
 		table.defaults().width(370).padLeft(40).spaceBottom(50);
-		
+
 		Label label1 = new Label(text1, style);
 		label1.setWrap(true);
 		Label label2 = new Label(text2, style);
 		label2.setWrap(true);
 		Label label3 = new Label(text3, style);
 		label3.setWrap(true);
-		Label label4 = new Label(text3, style);
+		Label label4 = new Label(text4, style);
 		label4.setWrap(true);
 		Label label5 = new Label(text5, style);
 		label5.setWrap(true);
@@ -107,7 +107,7 @@ public class CresitGroup extends Group {
 		Label label9 = new Label(text9, style);
 		label9.setFontScale(2);
 		label9.setWrap(true);
-		
+
 		table.add(label1).spaceBottom(100).row();
 		table.add(label2).row();
 		table.add(label3).row();
@@ -119,15 +119,15 @@ public class CresitGroup extends Group {
 		table.defaults().reset();
 		table.align(Align.center).add(label9).center().spaceTop(500).row();
 	}
-	
+
 	@Override
 	public void act(float delta) {
 		// TODO 自動生成されたメソッド・スタブ
 		float y = table.getY();
 		float pos = y + delta * 50;
 		table.setY(pos);
-		if(table.getY() >= 1300)
-			table.setY(1300);
+		if(table.getY() >= 1400)
+			table.setY(1400);
 		super.act(delta);
 	}
 }

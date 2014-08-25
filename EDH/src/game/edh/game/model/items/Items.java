@@ -1,6 +1,7 @@
 package game.edh.game.model.items;
 
 import game.edh.game.model.frame.GameWorld;
+import game.edh.game.model.frame.GameWorld.GameState;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -26,7 +27,9 @@ public abstract class Items {
 	}
 
 	public void longTap() {
-		world.textEvent(itemMassage);
+		if (world.getState() == GameState.NOMAL
+				|| world.getState() == GameState.EVENT)
+			world.textEvent(itemMassage);
 		Gdx.app.log("LongTap", "");
 	}
 

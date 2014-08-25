@@ -1,11 +1,11 @@
 package game.edh.game.model.stage2.event;
 
-import java.util.Arrays;
-
 import game.edh.game.model.frame.GameWorld;
 import game.edh.game.model.frame.GamesFlag.Stage2Flag;
 import game.edh.game.model.frame.event.EventRyouri;
 import game.edh.game.model.items.ItemsHandler;
+
+import java.util.Arrays;
 
 public class EventRyouri2 extends EventRyouri {
 	int[] colectId1 = { NASU, TOMATO, SOLT, OIL };
@@ -21,7 +21,7 @@ public class EventRyouri2 extends EventRyouri {
 			addTableObj(SAKANA, "さかな", "sakana");
 		else {
 			if (world.getItems().findItem(ItemsHandler.SAKANA)) {
-				addTableObj(SAKANA, "さかな", "sakana");
+				addShokuzai(SAKANA, "さかな", "sakana");
 				world.removeItem(ItemsHandler.SAKANA);
 				world.changeFlag(Stage2Flag.RYORI_IN_SAKANA, true);
 			}
@@ -31,7 +31,7 @@ public class EventRyouri2 extends EventRyouri {
 			addTableObj(TAMAGO, "たまご", "tamago");
 		else {
 			if (world.getItems().findItem(ItemsHandler.TAMAGO)) {
-				addTableObj(TAMAGO, "たまご", "tamago");
+				addShokuzai(TAMAGO, "たまご", "tamago");
 				world.removeItem(ItemsHandler.TAMAGO);
 				world.changeFlag(Stage2Flag.RYORI_IN_TAMAGO, true);
 			}
@@ -50,7 +50,7 @@ public class EventRyouri2 extends EventRyouri {
 		} else {
 			boolean a = Arrays.equals(inId, colectId1);
 			boolean b = Arrays.equals(inId, celectId2);
-			
+
 			world.textEvent("料理を作った");
 
 			if (a)

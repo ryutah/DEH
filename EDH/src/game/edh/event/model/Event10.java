@@ -9,7 +9,7 @@ public class Event10 extends EventWorld {
 	String[] texts1 = { "幼い頃は、よくこの森で遊んでいたらしいのですが、どうもよく覚えていません",
 			"春のにぎわいを見せる森の景色は、新鮮なような懐かしいような、綺麗で目を奪われてしまいます",
 			"森を進んでいくうちに、少し開けた場所にたどり着きました" };
-	String[] texts2 = { "他よりも足の低い草でが生え、ちょうど真ん中あたりには一本の木が生えています",
+	String[] texts2 = { "他よりも足の低い草が生え、ちょうど真ん中あたりには一本の木が生えています",
 			"ふと、木の根元あたりに何かあるのに気づきました" };
 	String[] texts3 = { "とても汚れた、犬の人形がありました", "周りの美しい景色とはまるで似合わない姿です",
 			"…なのに、なぜか目が離せず、女性はその人形を見つめていました……",
@@ -57,7 +57,7 @@ public class Event10 extends EventWorld {
 			break;
 		case 2:
 			((Event8Screen)screen).endGame();
-//			setState(EventState.End);
+			setState(EventState.End);
 		}
 	}
 
@@ -86,8 +86,6 @@ public class Event10 extends EventWorld {
 	@Override
 	void touchForEnd() {
 		// TODO 自動生成されたメソッド・スタブ
-		((Event8Screen)screen).endGame();
-//		screen.eventEnd();
 	}
 
 }

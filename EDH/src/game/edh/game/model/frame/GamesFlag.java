@@ -28,13 +28,13 @@ public class GamesFlag {
 		public static final String KAGI_GET = "kagiGet";
 		public static final String NIKKI = "nikki";
 		public static final String RYOURI = "ryouri";
-		public static final String KISHI_GET = "kishiGet";
+		public static final String NINGYO_GET = "ningyoGet";
 		public static final String PUT_NINGYO = "putNingyo";
 		public static final String RYORI_IN_KINOMI = "kinomiIn";
 		public static final String RYORI_IN_KUSA = "kusaIn";
 
-		public static final String[] FLAGS = {SANSOU, HAKO_OPEN, KAGI_GET,
-				NIKKI, RYOURI, KISHI_GET, PUT_NINGYO, RYORI_IN_KINOMI,
+		public static final String[] FLAGS = { SANSOU, HAKO_OPEN, KAGI_GET,
+				NIKKI, RYOURI, NINGYO_GET, PUT_NINGYO, RYORI_IN_KINOMI,
 				RYORI_IN_KUSA, KINOMI_GET };
 	}
 

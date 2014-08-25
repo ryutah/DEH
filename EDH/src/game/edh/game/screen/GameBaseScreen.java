@@ -1,15 +1,5 @@
 package game.edh.game.screen;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
 import game.edh.Assets;
 import game.edh.EdhGame;
 import game.edh.actors.TimeLabel;
@@ -17,14 +7,24 @@ import game.edh.frame.BaseClickAction;
 import game.edh.frame.BaseScreen;
 import game.edh.game.actor.ActorEvent;
 import game.edh.game.actor.ActorGameMap;
+import game.edh.game.actor.ActorItemPanel;
 import game.edh.game.actor.ActorSelectItem;
 import game.edh.game.actor.ActorText;
-import game.edh.game.actor.ActorItemPanel;
+import game.edh.game.actor.ActorTouchPad;
 import game.edh.game.model.frame.GameData;
 import game.edh.game.model.frame.GameWorld;
 import game.edh.game.model.items.Items;
 import game.edh.screen.LoadScreen;
 import game.edh.screen.LoadScreen.NextScreen;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public abstract class GameBaseScreen extends BaseScreen {
 	GameWorld world;
@@ -34,7 +34,7 @@ public abstract class GameBaseScreen extends BaseScreen {
 	ActorText text;
 	ActorEvent event;
 	ActorSelectItem item;
-	Touchpad pad;
+	ActorTouchPad pad;
 
 	public GameBaseScreen(EdhGame game) {
 		super(game);
@@ -66,10 +66,14 @@ public abstract class GameBaseScreen extends BaseScreen {
 				TextureRegionDrawable.class));
 		back.setBounds(0, 0, 432, 768);
 		back.setTouchable(Touchable.disabled);
-		item = new ActorSelectItem(world);
 
-		pad = new Touchpad(20, Assets.games, "touchpad");
-		pad.setPosition(216 - pad.getWidth() / 2, 50);
+		pad = new ActorTouchPad();
+
+		item = new ActorSelectItem(world);
+		if (pad.getCenterX() > 216)
+			item.setLeft();
+		else
+			item.setRight();
 
 		Label time = new TimeLabel();
 		time.setWrap(true);
@@ -119,9 +123,11 @@ public abstract class GameBaseScreen extends BaseScreen {
 					return;
 
 				if (velocityX >= 350) {
-					panel.fling(false);;
+					panel.fling(false);
+					;
 				} else if (velocityX <= -350) {
-					panel.fling(true);;
+					panel.fling(true);
+					;
 				}
 			}
 		});
@@ -147,13 +153,16 @@ public abstract class GameBaseScreen extends BaseScreen {
 	}
 
 	public void gameEnd() {
-		if(EdhGame.settings.autoSave)
+		if (EdhGame.settings.autoSave)
 			world.save();
+		else
+			EdhGame.loadFile();
 		changeScreen(new LoadScreen(edh, NextScreen.TITLE));
 	}
 
 	public void stageEnd() {
-		EdhGame.deleteData();
+		if (EdhGame.settings.autoSave)
+			EdhGame.deleteData();
 	}
 
 	public void selectItem(Items item) {
@@ -190,9 +199,22 @@ public abstract class GameBaseScreen extends BaseScreen {
 	}
 
 	@Override
+	public void show() {
+		// TODO 自動生成されたメソッド・スタブ
+		pad.changeParams();
+		if (pad.getCenterX() > 216)
+			item.setLeft();
+		else
+			item.setRight();
+		super.show();
+	}
+
+	@Override
 	public void hide() {
 		// TODO 自動生成されたメソッド・スタブ
 		super.hide();
+		if(!EdhGame.settings.autoSave)
+			EdhGame.loadFile();
 		Assets.disStage();
 	}
 
@@ -205,7 +227,7 @@ public abstract class GameBaseScreen extends BaseScreen {
 	@Override
 	public void pause() {
 		// TODO 自動生成されたメソッド・スタブ
-		if(EdhGame.settings.autoSave)
+		if (EdhGame.settings.autoSave)
 			world.save();
 	}
 

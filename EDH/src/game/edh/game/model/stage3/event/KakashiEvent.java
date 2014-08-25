@@ -26,7 +26,7 @@ public class KakashiEvent extends ModelEvent {
 			super.action(x, y);
 			world.textEvent("かかしがある");
 		}
-		
+
 		@Override
 		protected boolean flingAction(float velocityX, float velocityY) {
 			// TODO 自動生成されたメソッド・スタブ
@@ -39,8 +39,8 @@ public class KakashiEvent extends ModelEvent {
 					world.changeFlag(Stage3Flag.KAKASHI_KAGI_GET, true);
 				}
 				return true;
-			}
-			return false;
+			} else
+				return super.flingAction(velocityX, velocityY);
 		}
 
 	}

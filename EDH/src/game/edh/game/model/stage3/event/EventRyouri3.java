@@ -19,7 +19,7 @@ public class EventRyouri3 extends EventRyouri {
 		else {
 			if (world.getItems().findItem(ItemsHandler.KINOKO)) {
 				world.removeItem(ItemsHandler.KINOKO);
-				addTableObj(KINOKO, "きのこ", "kinoko");
+				addShokuzai(KINOKO, "きのこ", "kinoko");
 				world.changeFlag(Stage3Flag.RYOURI_IN_KINOKO, true);
 			}
 		}
@@ -29,7 +29,7 @@ public class EventRyouri3 extends EventRyouri {
 		else {
 			if (world.getItems().findItem(ItemsHandler.SAKANA)) {
 				world.removeItem(ItemsHandler.SAKANA);
-				addTableObj(SAKANA, "さかな", "sakana");
+				addShokuzai(SAKANA, "さかな", "sakana");
 				world.changeFlag(Stage3Flag.RYOURI_IN_SAKANA, true);
 			}
 		}

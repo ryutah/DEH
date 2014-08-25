@@ -1,8 +1,8 @@
 package game.edh.game.model.stage2.objs.map2;
 
 import game.edh.game.model.frame.GameWorld;
-import game.edh.game.model.frame.ModelInu;
 import game.edh.game.model.frame.GamesFlag.Stage2Flag;
+import game.edh.game.model.frame.ModelInu;
 
 public class Map2Inu extends ModelInu {
 	int textNum;
@@ -20,6 +20,7 @@ public class Map2Inu extends ModelInu {
 	@Override
 	public void checkObj() {
 		// TODO 自動生成されたメソッド・スタブ
+		super.checkObj();
 		if(!world.getFlag(Stage2Flag.NINGYO_PUT)) {
 			if(textNum == 0) {
 				world.textEvent(text);

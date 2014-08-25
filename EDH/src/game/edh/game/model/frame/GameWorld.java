@@ -13,7 +13,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Pools;
 
 public abstract class GameWorld {
 	public enum GameState {
@@ -94,7 +93,7 @@ public abstract class GameWorld {
 
 	/**
 	 * 開始時のマップを設定する
-	 * 
+	 *
 	 * @param map
 	 */
 	protected void setStartMap(Map map) {
@@ -105,7 +104,7 @@ public abstract class GameWorld {
 
 	/**
 	 * 画面切り替えの際に使われるマップを追加する
-	 * 
+	 *
 	 * @param map
 	 */
 	protected void addMap(Map map) {
@@ -174,7 +173,7 @@ public abstract class GameWorld {
 
 	/**
 	 * プレイヤーを移動させる
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param delta
@@ -187,12 +186,10 @@ public abstract class GameWorld {
 			float moveX = x * delta * player.getSpeed().x;
 			float moveY = y * delta * player.getSpeed().y;
 
-			if (!collision(moveX, moveY)) {
-				player.move(moveX, moveY);
-				map.checkMapChange(player.getBounds());
+			Vector2 move = map.checkCollision(player.getBounds(), moveX, moveY);
+			player.move(move.x, move.y);
 
-			} else
-				player.move(0, 0);
+			map.checkMapChange(player.getBounds());
 		}
 	}
 
@@ -203,18 +200,6 @@ public abstract class GameWorld {
 		player.stop();
 	}
 
-	boolean collision(float moveX, float moveY) {
-		Rectangle bufPlayer = Pools.obtain(Rectangle.class);
-		bufPlayer.set(player.getBounds());
-		bufPlayer.x += moveX;
-		bufPlayer.y += moveY;
-
-		boolean collision = map.collision(bufPlayer);
-		Pools.free(bufPlayer);
-
-		return collision;
-	}
-
 	void check() {
 		Rectangle check = player.getCheckBounds();
 		map.checkObj(check);
@@ -222,7 +207,7 @@ public abstract class GameWorld {
 
 	/**
 	 * マップ名で指定されたマップに切り替える
-	 * 
+	 *
 	 * @param mapName
 	 */
 	public void changeMap(String mapName) {
@@ -286,7 +271,7 @@ public abstract class GameWorld {
 
 	/**
 	 * テキストイベントを実行する
-	 * 
+	 *
 	 * @param texts
 	 */
 	public void textEvent(String... texts) {
@@ -301,26 +286,25 @@ public abstract class GameWorld {
 	 */
 	public void textEnd() {
 		state = befState;
+		if (state == GameState.MAPEVENT && mapEvent != null)
+			mapEvent.textEnd();
 		if (itemGet) {
 			EdhGame.music.playEffect(EfftctType.ITEMGET, false);
 			itemGet = false;
-		}
-
-		if (state == GameState.MAPEVENT && mapEvent != null)
-			mapEvent.textEnd();
-		else if (state == GameState.END)
+		} else if (state == GameState.END)
 			screen.stageEnd();
 	}
 
 	/**
 	 * ゲーム内のオブジェクト等を調べた際に発生する特殊な イベントを追加し、ゲームロジックをEventに切り替える
-	 * 
+	 *
 	 * @param event
 	 */
 	public void addEventObj(ModelEvent event) {
 		this.event = event;
 		state = GameState.EVENT;
 		screen.eventStart();
+		this.event.startEvent();
 		Gdx.app.log("Event", "");
 	}
 
@@ -353,7 +337,7 @@ public abstract class GameWorld {
 
 	/**
 	 * 取得したアイテムを追加する
-	 * 
+	 *
 	 * @param itemId
 	 */
 	public void addItem(int itemId) {
@@ -371,7 +355,7 @@ public abstract class GameWorld {
 
 	/**
 	 * アイテムを削除する
-	 * 
+	 *
 	 * @param itemId
 	 */
 	public void removeItem(int itemId) {
@@ -382,7 +366,7 @@ public abstract class GameWorld {
 
 	/**
 	 * アイテムを削除する
-	 * 
+	 *
 	 * @param itemName
 	 */
 	public void removeItem(String itemName) {
@@ -391,7 +375,7 @@ public abstract class GameWorld {
 
 	/**
 	 * 選択中のアイテムを変更する
-	 * 
+	 *
 	 * @param itemId
 	 */
 	public void selectItem(Items item) {
@@ -407,7 +391,7 @@ public abstract class GameWorld {
 
 	/**
 	 * ゲームで使用するフラグを変更する
-	 * 
+	 *
 	 * @param flagName
 	 */
 	public void changeFlag(String flagName) {
@@ -416,7 +400,7 @@ public abstract class GameWorld {
 
 	/**
 	 * ゲームで使用するフラグを第二引数に変更する
-	 * 
+	 *
 	 * @param flagName
 	 * @param flag
 	 */
@@ -454,7 +438,7 @@ public abstract class GameWorld {
 
 	/**
 	 * 現在選択中のアイテムを取得する
-	 * 
+	 *
 	 * @return
 	 */
 	public int getSelectItem() {
@@ -467,7 +451,7 @@ public abstract class GameWorld {
 
 	/**
 	 * 取得したアイテム情報を保存しているモデルクラスを取得する
-	 * 
+	 *
 	 * @return
 	 */
 	public ModelItems getItems() {
@@ -476,7 +460,7 @@ public abstract class GameWorld {
 
 	/**
 	 * ゲームプレイヤーのモデルクラスを取得する
-	 * 
+	 *
 	 * @return
 	 */
 	public ModelGameChara getPlayer() {
@@ -491,7 +475,7 @@ public abstract class GameWorld {
 
 	/**
 	 * 引数名のフラグを追加する
-	 * 
+	 *
 	 * @param name
 	 */
 	public void addFlag(String name) {
@@ -504,7 +488,7 @@ public abstract class GameWorld {
 
 	/**
 	 * 引数で指定されたフラグを取得する
-	 * 
+	 *
 	 * @param flagName
 	 * @return
 	 */
@@ -514,7 +498,7 @@ public abstract class GameWorld {
 
 	/**
 	 * テキストを操作するモデルクラスを取得する
-	 * 
+	 *
 	 * @return
 	 */
 	public ModelText getText() {
@@ -523,7 +507,7 @@ public abstract class GameWorld {
 
 	/**
 	 * イベントを操作するモデルクラスを取得する
-	 * 
+	 *
 	 * @return
 	 */
 	public ModelEvent getEvent() {

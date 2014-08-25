@@ -10,7 +10,7 @@ public class Kanazuti extends Items {
 		// TODO 自動生成されたコンストラクター・スタブ
 		setItemId(ItemsHandler.KANAZUTI);
 		setItemName("かなずち");
-		setItemMassage("金槌", "釘を打ったりする\n金槌というよりハンマーに見える");
+		setItemMassage("金槌\n\n釘を打ったりする\n金槌というよりハンマーに見える");
 		setDrawable(Assets.games, "kanazuti");
 	}
 

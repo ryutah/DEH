@@ -46,7 +46,8 @@ public class MusicHandler {
 			if (!isPlaying()) {
 				playMusic = true;
 				stopMusic = false;
-				Assets.music.setVolume(1.0f);				
+				Assets.music.setVolume(1.0f);
+				volume = 1;
 			}
 		}
 	}
@@ -90,7 +91,6 @@ public class MusicHandler {
 	public int getNowMusic() {
 		return nowMusic;
 	}
-
 
 	public void playEffect(EfftctType type, boolean loop) {
 		long id = 0;

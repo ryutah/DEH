@@ -1,6 +1,6 @@
 package game.edh.game.actor;
 
-import game.edh.Assets;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import game.edh.game.model.frame.GameWorld;
 import game.edh.game.model.frame.event.EventRyouri;
 import game.edh.game.model.frame.event.ModelEvent;
@@ -14,14 +14,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class ActorEvent extends Group {
 	GameWorld world;
@@ -63,26 +57,7 @@ public class ActorEvent extends Group {
 
 	void setActors() {
 		if (event instanceof EventRyouri) {
-			group = new Table();
-			group.setBounds(0, 550, 432, 120);
-			Image image = new Image(Assets.title.get("tanshoku",
-					TextureRegionDrawable.class));
-			image.setFillParent(true);
-			group.addActor(image);
-			image.setColor(0, 0, 0, .5f);
-
-			Table table = new Table();
-			table.defaults().width(80).height(80).space(30);
-			table.debug();
-			ScrollPane pane = new ScrollPane(table);
-			group.add(pane);
-
-			Array<ModelEventObj> objs = ((EventRyouri) event).getTableObj();
-			for (ModelEventObj obj : objs) {
-				Actor comp = new EventImage(obj);
-				table.add(comp);
-			}
-
+			group = new ActorEventRyoriTable((EventRyouri) event);
 			getParent().addActor(group);
 			group.setZIndex(2);
 		}

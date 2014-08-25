@@ -1,14 +1,11 @@
 package game.edh.game.model.stage1;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Rectangle;
-
 import game.edh.Assets;
 import game.edh.game.model.frame.GameWorld;
+import game.edh.game.model.frame.GamesFlag.Stage1Flag;
 import game.edh.game.model.frame.Map;
 import game.edh.game.model.frame.MapChangeRect;
 import game.edh.game.model.frame.MapObject;
-import game.edh.game.model.frame.GamesFlag.Stage1Flag;
 import game.edh.game.model.frame.ModelGameChara.GameCharaDir;
 import game.edh.game.model.stage1.objs.map1.Map1Inu;
 import game.edh.game.model.stage1.objs.map1.Map1KagiObj;
@@ -17,6 +14,9 @@ import game.edh.game.model.stage1.objs.map1.Map1Kanban2Obj;
 import game.edh.game.model.stage1.objs.map1.Map1KinomiObj;
 import game.edh.game.model.stage1.objs.map1.Map1SansouObj;
 import game.edh.game.model.stage1.objs.map1.Map1Stage1EndWallObj;
+
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
 
 public class MapStage1 extends Map {
 	public static final String NAME = "STAGE1";
@@ -75,6 +75,7 @@ public class MapStage1 extends Map {
 
 		if (!world.getFlag(Stage1Flag.NIKKI)) {
 			MapObject hashi = new MapObject(19, 4, 1, 4, "hashi", world);
+			hashi.setCollision(true);
 			addObjes(hashi);
 		} else {
 			addBackLayers("flagback");
